@@ -14,6 +14,7 @@ import com.ReachU.ServiceBookingSystem.services.client.ClientService;
 import com.ReachU.ServiceBookingSystem.utill.JwtUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,6 +30,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
@@ -60,6 +62,8 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(signupRequestDTO.getEmail());
         user.setPhone(signupRequestDTO.getPhone());
         user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
+        user.setEnabled(false);
+        user.setAccountLocked(false);
         user.setRole(UserRole.CLIENT);
         sendValidationEmail(user);
         return userRepository.save(user).getDto();
@@ -116,17 +120,19 @@ public class AuthServiceImpl implements AuthService {
     public void activateAccount(String token) {
         Token savedToken = tokenRepository.findByToken(token)
                 .orElseThrow(() -> new RuntimeException("Invalid token"));
+        log.error("Token has expired: {}", token);
         if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
             sendValidationEmail(savedToken.getUser());
             throw new RuntimeException("Activation token has expired. A new token has been send to the same email address");
         }
-        var user = userRepository.findById(savedToken.getUser().getId())
+        User user = userRepository.findById(savedToken.getUser().getId())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         user.setEnabled(true);
         userRepository.save(user);
 
         savedToken.setValidatedAt(LocalDateTime.now());
         tokenRepository.save(savedToken);
+        log.info("User {} activated successfully with token {}", user.getEmail(), token);
     }
 
     private String generateAndSaveActivationToken(User user) {

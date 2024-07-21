@@ -1,7 +1,8 @@
-package com.ReachU.ServiceBookingSystem.services.authentication;
+package com.ReachU.ServiceBookingSystem.services.authentication.authServiceImpl;
 
 import com.ReachU.ServiceBookingSystem.enums.EmailTemplateName;
 
+import com.ReachU.ServiceBookingSystem.services.authentication.EmailService;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;

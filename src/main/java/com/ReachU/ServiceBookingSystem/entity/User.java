@@ -4,6 +4,8 @@ import com.ReachU.ServiceBookingSystem.dto.UserDto;
 import com.ReachU.ServiceBookingSystem.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name ="users")
+@Table(name = "users")
 @Data
 public class User implements UserDetails {
 
@@ -37,14 +39,14 @@ public class User implements UserDetails {
     private UserRole role;
 
 
-
-
-    public UserDto getDto(){
+    public UserDto getDto() {
         UserDto userDto = new UserDto();
         userDto.setId(id);
         userDto.setName(name);
         userDto.setEmail(email);
         userDto.setRole(role);
+//        userDto.setLastname(lastname);
+//        userDto.setPhone(phone);
 
         return userDto;
     }
@@ -58,4 +60,5 @@ public class User implements UserDetails {
     public String getUsername() {
         return email;
     }
+
 }

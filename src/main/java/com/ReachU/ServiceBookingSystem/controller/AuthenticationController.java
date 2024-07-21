@@ -26,6 +26,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Tag(
@@ -62,7 +64,9 @@ public class AuthenticationController {
     public ResponseEntity<?> signupClient(@RequestBody SignupRequestDTO signupRequestDTO) {
 
         if (authService.presentByEmail(signupRequestDTO.getEmail())) {
-            return new ResponseEntity<>("Client already exists with this Email!", HttpStatus.NOT_ACCEPTABLE);
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Client already exists with this Email!");
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
         }
 
         UserDto createdUser = authService.signupClient(signupRequestDTO);
@@ -134,11 +138,4 @@ public class AuthenticationController {
         response.addHeader("Access-Control-Allow-Headers", "Authorization, X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, X-Custom-header");
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + jwt);
     }
-
-//    @GetMapping("/activate-account")
-//    public void confirm(
-//            @RequestParam String token
-//    ) throws MessagingException {
-//        service.activateAccount(token);
-//    }
 }

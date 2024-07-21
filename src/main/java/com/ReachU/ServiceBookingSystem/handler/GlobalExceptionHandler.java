@@ -71,27 +71,6 @@ public class GlobalExceptionHandler {
                 );
     }
 
-    /*@ExceptionHandler(ActivationTokenException.class)
-    public ResponseEntity<ExceptionResponse> handleException(ActivationTokenException exp) {
-        return ResponseEntity
-                .status(BAD_REQUEST)
-                .body(
-                        ExceptionResponse.builder()
-                                .error(exp.getMessage())
-                                .build()
-                );
-    }
-
-    @ExceptionHandler(OperationNotPermittedException.class)
-    public ResponseEntity<ExceptionResponse> handleException(OperationNotPermittedException exp) {
-        return ResponseEntity
-                .status(BAD_REQUEST)
-                .body(
-                        ExceptionResponse.builder()
-                                .error(exp.getMessage())
-                                .build()
-                );
-    }*/
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exp) {

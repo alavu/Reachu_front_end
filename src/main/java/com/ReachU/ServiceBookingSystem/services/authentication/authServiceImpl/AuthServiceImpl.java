@@ -1,4 +1,4 @@
-package com.ReachU.ServiceBookingSystem.services.authentication;
+package com.ReachU.ServiceBookingSystem.services.authentication.authServiceImpl;
 
 import com.ReachU.ServiceBookingSystem.dto.LoginDTO;
 import com.ReachU.ServiceBookingSystem.dto.SignupRequestDTO;
@@ -10,9 +10,10 @@ import com.ReachU.ServiceBookingSystem.enums.UserRole;
 import com.ReachU.ServiceBookingSystem.repository.TokenRepository;
 import com.ReachU.ServiceBookingSystem.repository.UserRepository;
 import com.ReachU.ServiceBookingSystem.response.LoginResponse;
+import com.ReachU.ServiceBookingSystem.services.authentication.AuthService;
+import com.ReachU.ServiceBookingSystem.services.authentication.EmailService;
 import com.ReachU.ServiceBookingSystem.services.client.ClientService;
 import com.ReachU.ServiceBookingSystem.utill.JwtUtil;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

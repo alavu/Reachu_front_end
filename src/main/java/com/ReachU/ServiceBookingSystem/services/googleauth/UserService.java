@@ -2,7 +2,6 @@ package com.ReachU.ServiceBookingSystem.services.googleauth;
 
 import com.ReachU.ServiceBookingSystem.entity.User;
 import com.ReachU.ServiceBookingSystem.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

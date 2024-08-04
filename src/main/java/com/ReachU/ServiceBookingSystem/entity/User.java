@@ -36,6 +36,10 @@ public class User implements UserDetails {
 
     private boolean enabled;
 
+    private boolean is_blocked;
+
+    private boolean is_blocked_by_admin;
+
     private UserRole role;
 
 

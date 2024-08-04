@@ -19,4 +19,6 @@ public class UserDto {
     private String phone;
 
     private UserRole role;
+
+    private boolean is_blocked;
 }

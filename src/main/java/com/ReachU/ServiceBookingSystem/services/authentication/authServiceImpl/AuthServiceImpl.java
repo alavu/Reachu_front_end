@@ -3,10 +3,12 @@ package com.ReachU.ServiceBookingSystem.services.authentication.authServiceImpl;
 import com.ReachU.ServiceBookingSystem.dto.LoginDTO;
 import com.ReachU.ServiceBookingSystem.dto.SignupRequestDTO;
 import com.ReachU.ServiceBookingSystem.dto.UserDto;
+import com.ReachU.ServiceBookingSystem.entity.AdminEntity;
 import com.ReachU.ServiceBookingSystem.entity.Token;
 import com.ReachU.ServiceBookingSystem.entity.User;
 import com.ReachU.ServiceBookingSystem.enums.EmailTemplateName;
 import com.ReachU.ServiceBookingSystem.enums.UserRole;
+import com.ReachU.ServiceBookingSystem.repository.AdminRepository;
 import com.ReachU.ServiceBookingSystem.repository.TokenRepository;
 import com.ReachU.ServiceBookingSystem.repository.UserRepository;
 import com.ReachU.ServiceBookingSystem.response.LoginResponse;
@@ -16,6 +18,8 @@ import com.ReachU.ServiceBookingSystem.services.client.ClientService;
 import com.ReachU.ServiceBookingSystem.utill.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -49,11 +53,12 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserDetailsService userDetailsService;
 
+    private final AdminRepository adminRepository;
 
 
     @Value("${application.mailing.frontend.activation-url}")
     private String activationUrl;
-
+    private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
     public UserDto signupClient(SignupRequestDTO signupRequestDTO) {
         User user = new User();
@@ -63,9 +68,11 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(signupRequestDTO.getEmail());
         user.setPhone(signupRequestDTO.getPhone());
         user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
-        user.setEnabled(false);
+        user.setEnabled(false); //Enable true only after otp verification
+        user.set_blocked(false);
         user.setAccountLocked(false);
         user.setRole(UserRole.CLIENT);
+        user.set_blocked_by_admin(false);
         sendValidationEmail(user);
         return userRepository.save(user).getDto();
     }
@@ -76,16 +83,15 @@ public class AuthServiceImpl implements AuthService {
 
     public UserDto signupCompany(SignupRequestDTO signupRequestDTO) {
         User user = new User();
-
         user.setName(signupRequestDTO.getName());
         user.setEmail(signupRequestDTO.getEmail());
         user.setPhone(signupRequestDTO.getPhone());
         user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
-        user.setEnabled(false);
+        user.setEnabled(false); //Enable true only after otp verification
+        user.set_blocked(false);
         user.setAccountLocked(false);
-
+        user.set_blocked_by_admin(false);
         user.setRole(UserRole.COMPANY);
-
         return userRepository.save(user).getDto();
     }
 
@@ -104,18 +110,30 @@ public class AuthServiceImpl implements AuthService {
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginDTO.getEmail());
         Optional<User> optionalUser = userRepository.findFirstByEmail(loginDTO.getEmail());
+        Optional<AdminEntity> optionalUserAdmin = adminRepository.findFirstByEmail(loginDTO.getEmail());
         final String jwtToken = jwtUtil.generateToken(String.valueOf(userDetails));
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
+            if (user.is_blocked() || user.isEnabled()){
+                throw new RuntimeException("User is blocked");
+            }
             return LoginResponse.builder()
                     .token(jwtToken)
-                    .userId(user.getId())
+                    .email(user.getEmail())
+                    .userRole(user.getRole())
                     .build();
+        } else if (optionalUserAdmin.isPresent()) {
+            AdminEntity admin = optionalUserAdmin.get();
+            return LoginResponse.builder()
+                    .token(jwtToken)
+                    .email(admin.getEmail())
+                    .userRole(admin.getUserRole())
+                    .build();
+
         }
         throw new RuntimeException("User not found");
     }
-
 
     @Override
     public void activateAccount(String token) {
@@ -128,7 +146,7 @@ public class AuthServiceImpl implements AuthService {
         }
         User user = userRepository.findById(savedToken.getUser().getId())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        user.setEnabled(true);
+        user.setEnabled(false);
         userRepository.save(user);
 
         savedToken.setValidatedAt(LocalDateTime.now());
@@ -136,13 +154,30 @@ public class AuthServiceImpl implements AuthService {
         log.info("User {} activated successfully with token {}", user.getEmail(), token);
     }
 
+    @Override
+    public void resendActivationCode(String email) {
+        User user = userRepository.findFirstByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Check if the user is already activated
+        if (user.isEnabled()) {
+            throw new RuntimeException("User is already activated");
+        }
+
+        // Send a new activation email
+        sendValidationEmail(user);
+        log.info("Resent activation code to {}", email);
+    }
+
+
     private String generateAndSaveActivationToken(User user) {
         // Generate a token
         String generatedToken = generateActivationCode();
+        log.debug("Generated Token: " + generatedToken);  // Log the generated token
         var token = Token.builder()
                 .token(generatedToken)
                 .createdAt(LocalDateTime.now())
-                .expiresAt(LocalDateTime.now().plusMinutes(5))
+                .expiresAt(LocalDateTime.now().plusMinutes(1))
                 .user(user)
                 .build();
         tokenRepository.save(token);

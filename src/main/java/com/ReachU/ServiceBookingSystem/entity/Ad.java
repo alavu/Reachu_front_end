@@ -1,6 +1,7 @@
 package com.ReachU.ServiceBookingSystem.entity;
 
 import com.ReachU.ServiceBookingSystem.dto.AdDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -27,6 +28,12 @@ public class Ad {
     private byte[] img;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
@@ -40,6 +47,7 @@ public class Ad {
         adDTO.setPrice(price);
         adDTO.setCompanyName(user.getName());
         adDTO.setReturnedImg(img);
+        adDTO.setCategoryId(category.getId());
 
         return adDTO;
     }

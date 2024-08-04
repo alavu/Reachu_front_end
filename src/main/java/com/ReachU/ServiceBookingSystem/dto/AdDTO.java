@@ -17,6 +17,8 @@ public class AdDTO {
     private MultipartFile img;
     private byte[] returnedImg;
 
+    private Long categoryId;
+
     private Long userId;
 
     private String companyName;

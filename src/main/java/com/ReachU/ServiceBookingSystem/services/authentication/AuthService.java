@@ -16,4 +16,6 @@ public interface AuthService {
     LoginResponse authenticate(LoginDTO loginDTO);
 
     void activateAccount(String token);
+
+    void resendActivationCode(String email);
 }

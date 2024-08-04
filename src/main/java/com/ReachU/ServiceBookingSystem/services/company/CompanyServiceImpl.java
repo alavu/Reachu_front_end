@@ -4,10 +4,12 @@ import com.ReachU.ServiceBookingSystem.dto.AdDTO;
 import com.ReachU.ServiceBookingSystem.dto.ReservationDTO;
 
 import com.ReachU.ServiceBookingSystem.entity.Ad;
+import com.ReachU.ServiceBookingSystem.entity.Category;
 import com.ReachU.ServiceBookingSystem.entity.Reservation;
 import com.ReachU.ServiceBookingSystem.entity.User;
 import com.ReachU.ServiceBookingSystem.enums.ReservationStatus;
 import com.ReachU.ServiceBookingSystem.repository.AdRepository;
+import com.ReachU.ServiceBookingSystem.repository.CategoryRepository;
 import com.ReachU.ServiceBookingSystem.repository.ReservationRepository;
 import com.ReachU.ServiceBookingSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +28,16 @@ public class CompanyServiceImpl implements CompanyService {
     private final UserRepository userRepository;
     private final AdRepository adRepository;
     private final ReservationRepository reservationRepository;
+    private final CategoryRepository categoryRepository;
 
     public boolean postAd(Long userId, AdDTO adDTO) throws IOException {
+        System.out.println("Received AdDTO: " + adDTO);
+        if (userId == null) {
+            throw new IllegalArgumentException("User ID must not be null");
+        }
+        if (adDTO.getCategoryId() == null) {
+            throw new IllegalArgumentException("Category ID must not be null");
+        }
         Optional<User> optionalUser = userRepository.findById(userId);
         if(optionalUser.isPresent()){
             Ad ad = new Ad();
@@ -37,6 +47,12 @@ public class CompanyServiceImpl implements CompanyService {
             ad.setPrice(adDTO.getPrice());
             ad.setUser(optionalUser.get());
 
+            Optional<Category> categoryOptional = categoryRepository.findById(adDTO.getCategoryId());
+            if (categoryOptional.isPresent()) {
+                ad.setCategory(categoryOptional.get());
+            } else {
+                throw new IllegalArgumentException("Invalid Category ID: " + adDTO.getCategoryId());
+            }
             adRepository.save(ad);
             return true;
         }

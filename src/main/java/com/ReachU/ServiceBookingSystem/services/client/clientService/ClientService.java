@@ -1,4 +1,4 @@
-package com.ReachU.ServiceBookingSystem.services.client;
+package com.ReachU.ServiceBookingSystem.services.client.clientService;
 
 
 import com.ReachU.ServiceBookingSystem.dto.AdDTO;

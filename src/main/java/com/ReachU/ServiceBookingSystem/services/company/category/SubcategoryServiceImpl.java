@@ -43,6 +43,16 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     }
 
     @Override
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public boolean checkSubCategoryNameExists(String name) {
+       return subcategoryRepository.existsByName(name);
+    }
+
+    @Override
     public void deleteSubCategory(Long id) {
         subcategoryRepository.deleteById(id);
     }

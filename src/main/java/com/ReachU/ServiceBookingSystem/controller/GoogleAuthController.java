@@ -1,11 +1,13 @@
 package com.ReachU.ServiceBookingSystem.controller;
 
-import com.ReachU.ServiceBookingSystem.configs.CustomUserDetails;
+import com.ReachU.ServiceBookingSystem.configs.GoogleCustomUserDetails;
 import com.ReachU.ServiceBookingSystem.entity.User;
 import com.ReachU.ServiceBookingSystem.services.googleauth.UserService;
 import com.ReachU.ServiceBookingSystem.utill.GoogleUserInfo;
 import com.ReachU.ServiceBookingSystem.utill.JwtUtil;
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +33,8 @@ public class GoogleAuthController {
         try {
             log.info("Received Google login request with data: {}", data);
             User user = userService.processGoogleLogin(data);
-            CustomUserDetails customUserDetails = new CustomUserDetails(user);
-            String token = jwtUtil.generateToken(String.valueOf(customUserDetails));
+            GoogleCustomUserDetails googleCustomUserDetails = new GoogleCustomUserDetails(user);
+            String token = jwtUtil.generateToken(googleCustomUserDetails);
             System.out.println("Token controller");
             return ResponseEntity.ok().body(Map.of("token", token));
         } catch (Exception e) {
@@ -40,37 +42,23 @@ public class GoogleAuthController {
         }
     }
 
-//    @GetMapping("/check-google-login")
-////    public ResponseEntity<?> checkGoogleLogin(HttpSession session) {
-////        try {
-////            GoogleUserInfo googleUserInfo = (GoogleUserInfo) session.getAttribute("googleUserInfo");
-////            if (googleUserInfo == null) {
-////                log.warn("GoogleUserInfo is null in session");
-////            }
-////            boolean isGoogleLogin = googleUserInfo != null && googleUserInfo.isEmailVerified();
-////            log.info("Google login status: {}", isGoogleLogin);
-////            return ResponseEntity.ok().body(new StatusResponse(isGoogleLogin));
-////        } catch (Exception e) {
-////            log.error("Error checking Google login status", e);
-////            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-////                    .body(new StatusResponse(false));
-////        }
-////    }
-
     @GetMapping("/check-google-login")
-    public ResponseEntity<?> checkGoogleLogin(HttpSession session) {
+    public ResponseEntity<StatusResponse> checkGoogleLogin(HttpSession session) {
         try {
-            // Retrieve the Google user information from the session
+            // Retrieve the GoogleUserInfo object from the session
             GoogleUserInfo googleUserInfo = (GoogleUserInfo) session.getAttribute("googleUserInfo");
 
-            // Determine the login status based on whether GoogleUserInfo is present and email_verified is true
-            boolean isGoogleLogin = googleUserInfo != null && googleUserInfo.isEmailVerified();
+            // Log the retrieved GoogleUserInfo object
+            log.info("Retrieved GoogleUserInfo from session: {}", googleUserInfo);
+
+            // Determine the login status based on the presence of GoogleUserInfo and email
+            boolean isGoogleLogin = googleUserInfo != null && googleUserInfo.getEmail() != null;
 
             // Log the status for debugging
             log.info("Google login status: {}", isGoogleLogin);
 
             // Return the appropriate response
-            return ResponseEntity.ok().body(new StatusResponse(isGoogleLogin));
+            return ResponseEntity.ok(new StatusResponse(isGoogleLogin));
         } catch (Exception e) {
             // Log the error
             log.error("Error in checkGoogleLogin", e);
@@ -81,20 +69,43 @@ public class GoogleAuthController {
         }
     }
 
-    static class StatusResponse {
+    @PostMapping("/google-callback")
+    public ResponseEntity<String> googleCallback(HttpSession session, @RequestParam Map<String, String> params) {
+        try {
+            // Extract email from the request parameters (assuming it is passed this way)
+            String email = params.get("email");
+
+            // Create a new GoogleUserInfo object
+            GoogleUserInfo googleUserInfo = new GoogleUserInfo();
+
+            // Check if email is null or empty
+            if (email != null && !email.isEmpty()) {
+                googleUserInfo.setEmail(email);
+            } else {
+                return ResponseEntity.badRequest().body("Email is required");
+            }
+
+            // Store the GoogleUserInfo object in the session
+            session.setAttribute("googleUserInfo", googleUserInfo);
+
+            // Log the stored information
+            log.info("GoogleUserInfo set in session: {}", googleUserInfo);
+
+            return ResponseEntity.ok("Google login successful");
+        } catch (Exception e) {
+            log.error("Error during Google login callback", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error during login");
+        }
+    }
+
+    @Setter
+    @Getter
+    public static class StatusResponse {
         private boolean loggedIn;
 
         public StatusResponse(boolean loggedIn) {
             this.loggedIn = loggedIn;
         }
 
-        public boolean isLoggedIn() {
-            return loggedIn;
-        }
-
-        public void setLoggedIn(boolean loggedIn) {
-            this.loggedIn = loggedIn;
-        }
     }
 }
-

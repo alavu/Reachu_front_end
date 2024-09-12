@@ -2,15 +2,15 @@ package com.ReachU.ServiceBookingSystem.entity;
 
 import com.ReachU.ServiceBookingSystem.dto.UserDto;
 import com.ReachU.ServiceBookingSystem.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -32,15 +32,20 @@ public class User implements UserDetails {
 
     private String phone;
 
-    private boolean accountLocked;
-
     private boolean enabled;
 
-    private boolean is_blocked;
+    private boolean blocked;
 
     private boolean is_blocked_by_admin;
 
-    private UserRole role;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+
+    private boolean is_google_logged_in;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Address> addresses;
 
 
     public UserDto getDto() {
@@ -48,7 +53,8 @@ public class User implements UserDetails {
         userDto.setId(id);
         userDto.setName(name);
         userDto.setEmail(email);
-        userDto.setRole(role);
+        userDto.setRole(userRole);
+//        userDto.setBlocked(blocked);
 //        userDto.setLastname(lastname);
 //        userDto.setPhone(phone);
 
@@ -57,7 +63,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return Collections.singleton(new SimpleGrantedAuthority(this.userRole.name()));
     }
 
     @Override

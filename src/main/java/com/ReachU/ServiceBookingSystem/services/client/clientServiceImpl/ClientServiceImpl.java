@@ -1,4 +1,4 @@
-package com.ReachU.ServiceBookingSystem.services.client;
+package com.ReachU.ServiceBookingSystem.services.client.clientServiceImpl;
 
 import com.ReachU.ServiceBookingSystem.dto.AdDTO;
 import com.ReachU.ServiceBookingSystem.dto.AdDetailsForClientDTO;
@@ -14,6 +14,8 @@ import com.ReachU.ServiceBookingSystem.repository.AdRepository;
 import com.ReachU.ServiceBookingSystem.repository.ReservationRepository;
 import com.ReachU.ServiceBookingSystem.repository.ReviewRepository;
 import com.ReachU.ServiceBookingSystem.repository.UserRepository;
+import com.ReachU.ServiceBookingSystem.services.client.clientService.ClientService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,14 +40,17 @@ public class ClientServiceImpl implements ClientService {
     private ReviewRepository reviewRepository;
 
 
+    @Override
     public List<AdDTO> getAllAds(){
         return adRepository.findAll().stream().map(Ad::getAdDto).collect(Collectors.toList());
     }
 
+    @Override
     public List<AdDTO> searchAdByName(String name){
         return adRepository.findAllByServiceNameContaining(name).stream().map(Ad::getAdDto).collect(Collectors.toList());
     }
 
+    @Override
     public boolean bookService(ReservationDTO reservationDTO){
         Optional<Ad> optionalAd = adRepository.findById(reservationDTO.getAdId());
         Optional<User> optionalUser = userRepository.findById(reservationDTO.getUserId());
@@ -67,6 +72,7 @@ public class ClientServiceImpl implements ClientService {
         return false;
     }
 
+    @Override
     public AdDetailsForClientDTO getAdDetailsByAdId(Long adId){
         Optional<Ad> optionalAd = adRepository.findById(adId);
         AdDetailsForClientDTO adDetailsForClientDTO = new AdDetailsForClientDTO();
@@ -79,10 +85,12 @@ public class ClientServiceImpl implements ClientService {
         return adDetailsForClientDTO;
     }
 
+    @Override
     public List<ReservationDTO> getAllBookingsByUserId(Long userId){
         return reservationRepository.findAllByUserId(userId).stream().map(Reservation::getReservationDto).collect(Collectors.toList());
     }
 
+    @Override
     public Boolean giveReview(ReviewDTO reviewDTO){
         Optional<User> optionalUser = userRepository.findById(reviewDTO.getUserId());
         Optional<Reservation> optionalBooking = reservationRepository.findById(reviewDTO.getBookId());

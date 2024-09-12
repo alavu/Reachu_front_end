@@ -2,7 +2,8 @@ package com.ReachU.ServiceBookingSystem.controller;
 
 import com.ReachU.ServiceBookingSystem.dto.ReservationDTO;
 import com.ReachU.ServiceBookingSystem.dto.ReviewDTO;
-import com.ReachU.ServiceBookingSystem.services.client.ClientService;
+import com.ReachU.ServiceBookingSystem.services.client.clientService.ClientService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/client")
 public class ClientController {
-
 
     @Autowired
     private ClientService clientService;

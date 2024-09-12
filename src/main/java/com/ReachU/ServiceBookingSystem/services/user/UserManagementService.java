@@ -8,10 +8,14 @@ import java.util.List;
 public interface UserManagementService {
 
     User save(UserDto userDto);
-
-    public List<UserDto> getAllUsers();
+    public List<User> getAllUsers();
+//    public List<UserDto> getAllUsers();
 
     User blockUser(Long userId);
 
-    boolean unblockUser(Long userId);
+    User unblockUser(Long userId);
+
+    boolean isAdminBlockedUser(Long userId);
+
+    Long findUserIdByEmail(String email);
 }

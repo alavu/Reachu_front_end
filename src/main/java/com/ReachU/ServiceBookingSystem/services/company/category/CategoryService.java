@@ -10,6 +10,12 @@ public interface CategoryService {
     Category createCategory(CategoryDto CategoryDto);
 
     List<Category> getAllCategories();
+
     Category updateCategory(Long id, CategoryDto categoryDto);
+
     void deleteCategory(Long id);
+
+    boolean checkCategoryNameExists(String name);
+
+    Category getCategoryById(Long id);
 }

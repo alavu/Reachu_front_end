@@ -1,6 +1,7 @@
 package com.ReachU.ServiceBookingSystem.services.company.category;
 
 import com.ReachU.ServiceBookingSystem.dto.SubcategoryDto;
+import com.ReachU.ServiceBookingSystem.entity.Category;
 import com.ReachU.ServiceBookingSystem.entity.Subcategory;
 
 import java.util.List;
@@ -14,4 +15,8 @@ public interface SubcategoryService {
     void deleteSubCategory(Long id);
 
     List<Subcategory> getSubcategoriesByCategoryId(Long categoryId);
+
+    List<Category> getAllCategories();
+
+    boolean checkSubCategoryNameExists(String name);
 }

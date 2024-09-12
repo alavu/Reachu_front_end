@@ -1,6 +1,7 @@
 package com.ReachU.ServiceBookingSystem.services.googleauth;
 
 import com.ReachU.ServiceBookingSystem.entity.User;
+import com.ReachU.ServiceBookingSystem.enums.UserRole;
 import com.ReachU.ServiceBookingSystem.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +58,12 @@ public class UserService {
                 user.setLastname(lastName);
                 user.setPhone(phoneNumber);
 //            user.setImage(image);
+                user.setUserRole(UserRole.CLIENT);
                 user.setPassword(password);
+                user.set_google_logged_in(true);
+                user.setEnabled(true);
+                user.set_blocked_by_admin(false);
+                user.setBlocked(false);
 
                 // Log debug information before saving
                 logger.info("Creating new user: {}", user);

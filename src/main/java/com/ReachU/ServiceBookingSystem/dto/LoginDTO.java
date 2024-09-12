@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class LoginDTO {
 
-
     @NotBlank(message = "Email should not be blank")
     @NotNull
     private String email;

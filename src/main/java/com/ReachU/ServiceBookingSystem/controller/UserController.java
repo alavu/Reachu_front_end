@@ -4,6 +4,7 @@ import com.ReachU.ServiceBookingSystem.dto.UserDto;
 import com.ReachU.ServiceBookingSystem.entity.User;
 import com.ReachU.ServiceBookingSystem.services.user.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,41 +17,29 @@ public class UserController {
     @Autowired
     private UserManagementService userManagementService;
 
-   /* @GetMapping("/list")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> users = userManagementService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
-
-    @PostMapping("/{userId}/block")
-    public ResponseEntity<Void> blockUser(@PathVariable Long userId) {
-        userManagementService.blockUser(userId);
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/{userId}/unblock")
-    public ResponseEntity<Void> unblockUser(@PathVariable Long userId) {
-        userManagementService.unblockUser(userId);
-        return ResponseEntity.ok().build();
-    }*/
-
-
     @GetMapping("/list")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> users = userManagementService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userManagementService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @PutMapping("/block/{id}")
     public ResponseEntity<?> blockUser(@PathVariable Long id) {
-        var data = userManagementService.blockUser(id);
-        System.out.println("blocked data ->" + data);
-        return ResponseEntity.ok().build();
+        var user = userManagementService.blockUser(id);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        System.out.println("Blocked data -> " + user);
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("/unblock/{id}")
     public ResponseEntity<?> unblockUser(@PathVariable Long id) {
-        userManagementService.unblockUser(id);
-        return ResponseEntity.ok().build();
+        var user = userManagementService.unblockUser(id);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        System.out.println("unblocked data -> " + user);
+        return ResponseEntity.ok(user);
     }
 }

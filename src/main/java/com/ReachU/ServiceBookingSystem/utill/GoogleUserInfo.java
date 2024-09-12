@@ -1,21 +1,17 @@
 package com.ReachU.ServiceBookingSystem.utill;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class GoogleUserInfo {
-    private boolean email_verified;
-
-    public boolean isEmailVerified() {
-        return email_verified;
-    }
-
-    public void setEmailVerified(boolean emailVerified) {
-        this.email_verified = emailVerified;
-    }
+    private String email;
 
     @Override
     public String toString() {
-        System.out.println("Email verified: " + email_verified);
         return "GoogleUserInfo{" +
-                "emailVerified=" + email_verified +
+                "email='" + email + '\'' +
                 '}';
     }
 }

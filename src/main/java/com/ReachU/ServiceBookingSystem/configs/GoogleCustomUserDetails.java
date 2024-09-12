@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public class CustomUserDetails implements UserDetails {
+public class GoogleCustomUserDetails implements UserDetails {
 
     private String email;
 
@@ -21,12 +21,11 @@ public class CustomUserDetails implements UserDetails {
 
     private UserRole role;
 
-    public CustomUserDetails(User user) {
+    public GoogleCustomUserDetails(User user) {
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.accountLocked = user.isAccountLocked();
         this.enabled = user.isEnabled();
-        this.role = user.getRole();
+        this.role = user.getUserRole();
     }
 
     @Override

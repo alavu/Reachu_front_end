@@ -20,5 +20,5 @@ public class UserDto {
 
     private UserRole role;
 
-    private boolean is_blocked;
+    private boolean blocked;
 }

@@ -1,5 +1,4 @@
 package com.ReachU.ServiceBookingSystem.dto;
-
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,11 +14,15 @@ public class AdDTO {
     private Double price;
 
     private MultipartFile img;
+
     private byte[] returnedImg;
 
     private Long categoryId;
 
     private Long userId;
 
-    private String companyName;
+    private Long subcategoryId;
+
+
+//    private String companyName;
 }

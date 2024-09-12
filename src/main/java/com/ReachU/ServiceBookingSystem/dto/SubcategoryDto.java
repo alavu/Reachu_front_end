@@ -1,6 +1,5 @@
 package com.ReachU.ServiceBookingSystem.dto;
 
-import com.ReachU.ServiceBookingSystem.entity.Category;
 import lombok.Data;
 
 @Data

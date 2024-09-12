@@ -4,14 +4,17 @@ import com.ReachU.ServiceBookingSystem.enums.UserRole;
 import lombok.Builder;
 
 import java.util.Objects;
+
 @Builder
-public record LoginResponse(String token, String email, UserRole userRole) {
+public record LoginResponse(String token,String refreshToken, Long userId, UserRole userRole, Long expiresIn) {
 
     public LoginResponse build() {
         Objects.requireNonNull(token, "Token must not be null");
-//        Objects.requireNonNull(userId, "User ID must not be null");
-        Objects.requireNonNull(email, "User Email must not be null");
-        Objects.requireNonNull(userRole, "User Role must not be null");
-        return new LoginResponse(token, email,userRole);
+        Objects.requireNonNull(refreshToken, "Refresh token must not be null");
+        Objects.requireNonNull(userId, "User ID must not be null");
+        Objects.requireNonNull(userRole, "User role must not be null");
+        Objects.requireNonNull(expiresIn, "Expires In must not be null");
+
+        return new LoginResponse(token,refreshToken, userId, userRole, expiresIn);
     }
 }

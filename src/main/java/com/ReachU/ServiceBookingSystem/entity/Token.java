@@ -30,6 +30,10 @@ public class Token {
     private LocalDateTime validatedAt;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userId", nullable = true)
     private User user;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "partnerId", nullable = true)
+    private PartnerEntity partner;
 }

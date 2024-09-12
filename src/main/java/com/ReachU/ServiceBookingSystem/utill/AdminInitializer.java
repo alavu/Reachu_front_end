@@ -23,18 +23,20 @@ public class AdminInitializer {
 
     private final PasswordEncoder passwordEncoder;
 
+    String adminEmail = "admin@gmail.com";
+    String adminPassword = "admin";
+
     @PostConstruct
     public void createAnAdminAccount() {
-        Optional<AdminEntity> optionalAdmin = adminRepository.findAdminEntityByUserRole(UserRole.ADMIN);
+        Optional<AdminEntity> optionalAdmin = adminRepository.findFirstByEmail(adminEmail);
         if (optionalAdmin.isEmpty()) {
-            AdminEntity admin = new AdminEntity();
-            admin.setEmail("admin@gmail.com");
-            admin.setPassword(passwordEncoder.encode("admin"));
-            admin.setUserRole(UserRole.ADMIN);
+            String password = passwordEncoder.encode(adminPassword);
+            AdminEntity admin = new AdminEntity(1L,adminEmail,password, UserRole.ADMIN);
             adminRepository.save(admin);
             log.info("Admin account created successfully");
         } else {
             log.info("Admin account already exists");
         }
     }
+
 }

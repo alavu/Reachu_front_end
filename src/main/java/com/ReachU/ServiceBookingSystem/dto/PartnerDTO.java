@@ -1,9 +1,5 @@
 package com.ReachU.ServiceBookingSystem.dto;
-
-import com.ReachU.ServiceBookingSystem.enums.UserRole;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class PartnerDTO {
@@ -15,5 +11,5 @@ public class PartnerDTO {
     private String phone;
     private byte[] img;
     private String service;
-//    private List<Long> serviceIds; // Use service IDs instead of full service objects
+    private Double rating;
 }

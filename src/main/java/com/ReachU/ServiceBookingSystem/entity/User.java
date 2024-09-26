@@ -54,7 +54,7 @@ public class User implements UserDetails {
         userDto.setName(name);
         userDto.setEmail(email);
         userDto.setRole(userRole);
-//        userDto.setBlocked(blocked);
+        userDto.setBlocked(blocked);
 //        userDto.setLastname(lastname);
 //        userDto.setPhone(phone);
 

@@ -6,7 +6,8 @@ import lombok.Builder;
 import java.util.Objects;
 
 @Builder
-public record LoginResponse(String token,String refreshToken, Long userId, UserRole userRole, Long expiresIn) {
+public record LoginResponse(String token,String refreshToken, Long userId, UserRole userRole,
+                            Long expiresIn,boolean blocked, boolean verified) {
 
     public LoginResponse build() {
         Objects.requireNonNull(token, "Token must not be null");
@@ -14,7 +15,9 @@ public record LoginResponse(String token,String refreshToken, Long userId, UserR
         Objects.requireNonNull(userId, "User ID must not be null");
         Objects.requireNonNull(userRole, "User role must not be null");
         Objects.requireNonNull(expiresIn, "Expires In must not be null");
+        Objects.requireNonNull(expiresIn, "blocked In must not be null");
+        Objects.requireNonNull(verified, "verified In must not be null");
 
-        return new LoginResponse(token,refreshToken, userId, userRole, expiresIn);
+        return new LoginResponse(token,refreshToken, userId, userRole, expiresIn, blocked, verified);
     }
 }

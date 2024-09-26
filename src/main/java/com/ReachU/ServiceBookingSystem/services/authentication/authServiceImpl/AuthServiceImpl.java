@@ -115,6 +115,9 @@ public class AuthServiceImpl implements AuthService {
         Optional<User> optionalUser = userRepository.findUserByEmail(loginDTO.getEmail());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
+//            if (user.isBlocked() || !user.isEnabled()) {
+//                throw new RuntimeException("User is blocked");
+//            }
             final UserDetails userDetails = customUserDetailService.loadUserByUsername(loginDTO.getEmail());
             Map<String, String> tokens = jwtUtil.createTokens(userDetails);
 
@@ -124,6 +127,7 @@ public class AuthServiceImpl implements AuthService {
                     .refreshToken(tokens.get("refreshToken"))
                     .userRole(user.getUserRole())
                     .expiresIn(jwtUtil.getExpirationTime())
+                    .blocked(user.isBlocked())
                     .build();
 
         }
@@ -144,6 +148,12 @@ public class AuthServiceImpl implements AuthService {
         Optional<PartnerEntity> optionalPartner = partnerRepository.findFirstByEmail(loginDTO.getEmail());
         if (optionalPartner.isPresent()) {
             PartnerEntity partner = optionalPartner.get();
+
+            // Check if the partner is blocked or not enabled
+//            if (partner.isBlocked() || !partner.isEnabled()) {
+//                throw new RuntimeException("Partner is blocked");
+//            }
+
             final UserDetails partnerDetails = customUserDetailService.loadUserByUsername(loginDTO.getEmail());
             Map<String, String> tokens = jwtUtil.createTokens(partnerDetails);
 
@@ -153,6 +163,8 @@ public class AuthServiceImpl implements AuthService {
                     .userId(partner.getId())
                     .userRole(partner.getUserRole())
                     .expiresIn(jwtUtil.getExpirationTime())
+                    .blocked(partner.isBlocked())
+                    .verified(partner.isVerified())
                     .build();
         }
         else {

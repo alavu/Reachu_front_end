@@ -5,9 +5,12 @@ import com.ReachU.ServiceBookingSystem.entity.User;
 import jakarta.mail.Part;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PartnerRepository extends JpaRepository<PartnerEntity, Long> {
     Optional<PartnerEntity> findByEmail(String email);
     Optional<PartnerEntity> findFirstByEmail(String email);
+
+    List<PartnerEntity> findByService(String service);
 }

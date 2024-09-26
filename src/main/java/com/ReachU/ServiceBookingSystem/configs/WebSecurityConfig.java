@@ -47,6 +47,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/addresses/**").authenticated()
                                 .requestMatchers("/api/category/**").permitAll()
                                 .requestMatchers("/api/partners/**").permitAll()
+                                .requestMatchers("/api/payment").permitAll()
                                 .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 )

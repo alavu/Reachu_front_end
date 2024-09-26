@@ -35,17 +35,19 @@ public class PartnerEntity implements UserDetails {
     @Column(columnDefinition = "longblob")
     private byte[] img;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "partner_service",
-//            joinColumns = @JoinColumn(name = "partner_id"),
-//            inverseJoinColumns = @JoinColumn(name = "service_id")
-//    )
-//    private List<ServiceEntity> selectServices;
 
     private boolean enabled;
 
     private boolean blocked;
+
+    @Column(name = "verified", nullable = false)
+    private boolean verified = false;
+
+    @Column(name = "rejected", nullable = false)
+    private boolean rejected;
+
+    @Column(length = 500)
+    private String rejectionReason;
 
     private boolean is_blocked_by_admin;
 

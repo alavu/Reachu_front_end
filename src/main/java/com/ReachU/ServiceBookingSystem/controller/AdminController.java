@@ -2,6 +2,7 @@ package com.ReachU.ServiceBookingSystem.controller;
 
 import com.ReachU.ServiceBookingSystem.dto.AdDTO;
 import com.ReachU.ServiceBookingSystem.dto.ReservationDTO;
+import com.ReachU.ServiceBookingSystem.entity.PartnerEntity;
 import com.ReachU.ServiceBookingSystem.services.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")

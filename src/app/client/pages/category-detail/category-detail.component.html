@@ -1,0 +1,113 @@
+<div class="flex justify-between p-6 bg-white">
+  <!-- Left Side: Packages -->
+  <div class="w-2/3 pr-8">
+    <h2 class="text-2xl font-bold mb-4">Bestseller packages</h2>
+    
+    <!-- Package 1 -->
+    <div class="border-b pb-4 mb-4">
+      <div class="border border-gray-300 p-4 rounded-lg">
+        <div *ngFor="let ad of ads" class="flex justify-between items-center mb-4 border-b pb-4">
+          <div>
+            <div class="text-green-700 font-bold">PACKAGE</div>
+            <h3 class="text-xl font-semibold"> {{ad.serviceName}}</h3>
+            <div class="text-sm text-gray-500 flex items-center">
+              <span class="mr-1">⭐⭐⭐⭐⭐</span>
+              <span>4.85 (1.7M reviews)</span>
+            </div>
+            <div class="mt-2">
+              <span class="text-lg text-gray-500 line-through">₹699</span>
+              <span class="text-xl font-bold text-black ml-2">{{ad.price}}</span>
+              <span class="text-sm text-gray-500 ml-2">• 1 hr 10 mins</span>
+            </div>
+            <ul class="list-disc list-inside mt-2 text-gray-700 text-sm">
+              <li>{{ad.description}}</li>
+              <li>Facial Hair Removal: Threading: Eyebrow, Threading: Upper lip</li>
+            </ul>
+            <button class="mt-4 text-purple-700 border border-purple-700 rounded-full px-4 py-1">Edit your package</button>
+          </div>
+          <div>
+            <ng-container *ngIf="package1Quantity === 0; else quantitySelector1">
+                <button (click)="addPackage(1)" class="bg-purple-200 text-purple-700 font-bold py-2 px-4 rounded-full">Add</button>
+            </ng-container>
+            <ng-template #quantitySelector1>
+                <div class="flex items-center">
+                    <button (click)="decrementPackage(1)" class="bg-purple-200 text-purple-700 font-bold py-2 px-4 rounded-full">-</button>
+                            <span class="mx-2">{{ ad.quantity }}</span>
+                    <button (click)="incrementPackage(1)" class="bg-purple-200 text-purple-700 font-bold py-2 px-4 rounded-full">+</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+      </div>
+    </div>
+
+    <!-- Package 2 -->
+    <div class="border border-gray-300 p-4 rounded-lg">
+      <div class="flex justify-between items-center">
+        <div>
+          <div class="text-green-700 font-bold">PACKAGE</div>
+          <h3 class="text-xl font-semibold">Wax & glow</h3>
+          <div class="text-sm text-gray-500 flex items-center">
+            <span class="mr-1">⭐⭐⭐⭐⭐</span>
+            <span>4.85 (4.1M reviews)</span>
+          </div>
+          <div class="mt-2">
+            <span class="text-lg text-gray-500 line-through">₹2,249</span>
+            <span class="text-xl font-bold text-black ml-2">₹2,199</span>
+            <span class="text-sm text-gray-500 ml-2">• 2 hrs 20 mins</span>
+          </div>
+          <ul class="list-disc list-inside mt-2 text-gray-700 text-sm">
+            <li>Waxing: Full arm - RICA Roll on, Full legs - RICA Roll on</li>
+            <li>Facial: Glovite lightening facial</li>
+            <li>Facial Hair Removal: Upper lip - Threading</li>
+          </ul>
+          <button class="mt-4 text-purple-700 border border-purple-700 rounded-full px-4 py-1">Edit your package</button>
+        </div>
+        <div class="flex items-center">
+          <button class="bg-purple-200 text-purple-700 font-bold py-2 px-4 rounded-full">-</button>
+          <span class="mx-2">1</span>
+          <button class="bg-purple-200 text-purple-700 font-bold py-2 px-4 rounded-full">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Cart -->
+  <div class="w-1/3 bg-gray-50 p-6 rounded-lg border border-gray-300">
+    <h3 class="text-xl font-semibold mb-4">Cart</h3>
+    <div class="border border-gray-300 p-4 rounded-lg mb-4">
+      <h4 class="font-bold">Wax & glow</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700 text-sm">
+        <li>Glovite lightening facial</li>
+        <li>Threading: Upper lip</li>
+        <li>Full Arms + Underarms RICA Roll-on</li>
+        <li>Full Legs RICA roll-on</li>
+      </ul>
+      <button class="mt-4 text-purple-700 border border-purple-700 rounded-full px-4 py-1">Edit</button>
+    </div>
+
+    <div class="bg-green-100 text-green-700 p-4 rounded-lg mb-4">
+      <p>Congratulations! ₹50 saved so far!</p>
+    </div>
+
+    <div class="flex justify-between items-center mb-4">
+      <span class="text-xl font-bold">₹2,199</span>
+      <span class="text-lg text-gray-500 line-through">₹2,249</span>
+    </div>
+    
+    <button class="w-full bg-purple-700 text-white font-bold py-3 rounded-full">View Cart</button>
+    
+    <div class="mt-6 text-center">
+      <p class="text-sm text-gray-500">Save 10% on every order</p>
+      <a href="#" class="text-purple-700 text-sm">Get Plus now</a>
+    </div>
+
+    <div class="mt-6">
+      <h4 class="font-bold text-lg">UC Promise</h4>
+      <ul class="list-disc list-inside text-gray-700 text-sm">
+        <li>4.5+ Rated Beauticians</li>
+        <li>Luxury Salon Experience</li>
+      </ul>
+    </div>
+  </div>
+</div>

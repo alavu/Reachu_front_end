@@ -1,0 +1,46 @@
+<header *ngIf="showHeader" class="header">
+    <div class="logo">ReachU Company</div>
+    <!-- <div class="search-bar">
+        <input type="text" placeholder="Search for services...">
+    </div> -->
+    <nav>
+        <ul>
+            <li><a href="/home" routerLink="/home" routerLinkActive="active">Home</a></li>
+            <li><a routerLink="/partner-login" routerLinkActive="active">Become a partner</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="header-icons">
+        <!-- <a href="#"><i class="fas fa-shopping-cart"></i></a> -->
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+              <button (click)="toggleDropdown()" class="text-gray-700 hover:text-gray-900 focus:outline-none">
+                <i class="fas fa-user"></i>
+              </button>
+              <ul *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                <li>
+                  <a (click)="navigateToMyBookings()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                    My Bookings
+                  </a>
+                  </li>
+                  <li>
+                  <a (click)="navigateToMyChat()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                    Chat
+                  </a>
+                </li>
+                <!-- Add more dropdown items as needed -->
+              </ul>
+            </div>
+            </div>
+
+        <ng-container *ngIf="isClientLoggedIn || isAdminLoggedIn || isPartnerLoggedIn || isGoogleLogin; else loginTemplate">
+            <a (click)="logout()" class="btn">Logout</a>
+        </ng-container>
+
+        <ng-template #loginTemplate>
+            <a href="/login"><button class="btn" routerLink="/login" routerLinkActive="active">Login/Sign Up</button></a>
+        </ng-template>
+    </div>
+</header>

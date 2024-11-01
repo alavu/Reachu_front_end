@@ -1,0 +1,65 @@
+<!-- layout.component.html -->
+<div class="flex h-screen bg-gray-100 p-6">
+  <!-- Sidebar -->
+  <!-- <aside class="w-64 bg-gradient-to-r from-teal-600 to-teal-400 rounded-lg mr-6 p-5 shadow-md">
+    <ul class="space-y-4 text-custom-dark">
+      <li>
+        <a routerLink="/dashboard" class="flex items-center px-4 py-2 rounded-lg hover:bg-teal-500">
+          <i class="icon-class mr-2"></i> Dashboard
+        </a>
+      </li>
+      <li>
+        <a routerLink="/orders" class="flex items-center px-4 py-2 rounded-lg hover:bg-teal-500">
+          <i class="icon-class mr-2"></i> Orders
+        </a>
+      </li> -->
+      <!-- <li>
+        <a routerLink="/my-address" class="flex items-center px-4 py-2 rounded-lg hover:bg-teal-500">
+          <i class="icon-class mr-2"></i> My Address
+        </a>
+      </li> -->
+      <!-- <li>
+        <a routerLink="/account-details" class="flex items-center px-4 py-2 rounded-lg hover:bg-teal-500">
+          <i class="icon-class mr-2"></i> Account details
+        </a>
+      </li>
+      <li>
+        <a routerLink="/logout" class="flex items-center px-4 py-2 rounded-lg hover:bg-teal-500">
+          <i class="icon-class mr-2"></i> Logout
+        </a>
+      </li>
+    </ul>
+  </aside> -->
+
+  <!-- Profile Content -->
+  <main class="flex-1 bg-white rounded-lg p-6 shadow-lg flex justify-center items-center">
+    <div class="w-full max-w-lg p-6 bg-white shadow-md rounded-lg">
+      <h2 class="text-2xl font-semibold mb-4 text-center">Profile Details</h2>
+
+      <div class="flex justify-center mb-5">
+        <img class="w-20 h-20 p-1 rounded-full ring-2 ring-gray-300" [src]="partner.imageUrl || '/assets/profile.jpg'" alt="Partner avatar">
+      </div>      
+
+      <div class="mb-5">
+        <div class="flex justify-between mb-3">
+          <span class="font-bold text-gray-700">Full Name:</span>
+          <span class="text-gray-900">{{ partner.name || '- not added -' }}</span>
+        </div>
+        <div class="flex justify-between mb-3">
+          <span class="font-bold text-gray-700">Mobile Number:</span>
+          <span class="text-gray-900">{{ partner.phone || '- not added -' }}</span>
+        </div>
+        <div class="flex justify-between mb-3">
+          <span class="font-bold text-gray-700">Email ID:</span>
+          <span class="text-gray-900">{{ partner.email || '- not added -' }}</span>
+        </div>
+        <div class="flex justify-between mb-3">
+          <span class="font-bold text-gray-700">Service:</span>
+          <span class="text-gray-900">{{ partner.service || '- not added -' }}</span>
+        </div>
+      </div>
+
+      <button class="w-full py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700" (click)="editProfile()">EDIT</button>
+    </div>
+  </main>
+</div>

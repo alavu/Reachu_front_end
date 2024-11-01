@@ -1,0 +1,8 @@
+{
+    "/api": {
+        "target": "https://preview-uikit-server.zegotech.cn",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

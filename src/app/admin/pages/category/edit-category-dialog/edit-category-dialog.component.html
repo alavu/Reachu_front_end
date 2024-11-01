@@ -1,0 +1,24 @@
+<div class="bg-white rounded-lg shadow-lg p-6">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">Edit Category</h2>
+  
+    <div class="mb-4">
+      <label for="category-id" class="block text-sm font-medium text-gray-700">Category ID:</label>
+      <input type="text" id="category-id" [(ngModel)]="data.id" disabled class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-100" />
+    </div>
+  
+    <div class="mb-4">
+      <label for="name" class="block text-sm font-medium text-gray-700">Category Name:</label>
+      <input type="text" id="name" [(ngModel)]="data.name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+    </div>
+  
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
+      <textarea id="description" [(ngModel)]="data.description" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+    </div>
+  
+    <div class="flex justify-end space-x-2 mt-4">
+      <button (click)="onCancel()" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cancel</button>
+      <button (click)="onSave()" class="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
+    </div>
+  </div>
+  

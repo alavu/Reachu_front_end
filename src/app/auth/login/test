@@ -1,0 +1,121 @@
+// export class LoginComponent implements OnInit {
+
+//     hide = true;
+//     validateForm!: FormGroup;
+
+//     constructor(
+//         private fb: FormBuilder,
+//         private authService: AuthService,
+//         private snackBar: MatSnackBar,
+//         private router: Router,
+//         private ngZone: NgZone
+//     ) {}
+
+//     togglePasswordVisibility(): void {
+//         this.hide = !this.hide;
+//     }
+
+//     ngOnInit(): void {
+//         if (google) {
+//             google.accounts.id.initialize({
+//                 client_id: environment.googleClientId,
+//                 callback: (response: any) => this.ngZone.run(() => this.handleLogin(response))
+//             });
+
+//             google.accounts.id.renderButton(document.getElementById("google-btn"), {
+//                 theme: 'filled_white',
+//                 size: 'large',
+//                 text: 'signin_with',
+//                 shape: 'rectangular'
+//             });
+//         } else {
+//             console.error('Google accounts API is not available.');
+//         }
+
+//         this.validateForm = this.fb.group({
+//             email: [null, [Validators.email, Validators.required]],
+//             password: [null, [Validators.required]]
+//         });
+//     }
+
+//     submitLoginForm(): void {
+//         if (this.validateForm.invalid) {
+//             Object.values(this.validateForm.controls).forEach(control => {
+//                 if (control instanceof FormControl) {
+//                     control.markAsDirty();
+//                     control.updateValueAndValidity();
+//                 }
+//             });
+//             return;
+//         }
+
+//         this.authService.loginUser(this.validateForm.value).subscribe({
+//             next: async (response: any) => {
+//                 console.log('Login Form Submitted', this.validateForm.value);
+//                 this.snackBar.open('Sign In Successful', 'Close', {
+//                     duration: 3000,
+//                     panelClass: 'app-notification-success'
+//                 });
+
+//                 // Save the JWT token to local storage
+//                 localStorage.setItem('jwtToken', response.token);
+
+//                 try {
+//                     await this.router.navigateByUrl('/sideBar');
+//                 } catch (error) {
+//                     this.snackBar.open('Navigation failed', 'Error', {
+//                         duration: 3000,
+//                         panelClass: 'app-notification-error'
+//                     });
+//                 }
+//             },
+//             error: (error: any) => {
+//                 this.snackBar.open(${error.error}, 'Error', {
+//                     duration: 3000,
+//                     panelClass: 'app-notification-error'
+//                 });
+//             }
+//         });
+//     }
+
+//     private decodeToken(token: string) {
+//         return JSON.parse(atob(token.split(".")[1]));
+//     }
+
+//     handleLogin(response: any) {
+//         if (response) {
+//             console.log(response.credential
+//             )
+//             const id_token = response.credential;
+//             const result = this.decodeToken(id_token);
+//             console.log(result)
+//             this.authService.googleLogin({ data: result }).subscribe({
+//                 next: (res: any) => {
+//                     localStorage.setItem('jwtToken', res.token);
+//                     this.snackBar.open('Google Sign-In Success', 'Success', {
+//                         duration: 3000,
+//                     })
+//                     this.router.navigate(['/sideBar']);
+//                 },
+//                 error:() => {
+//                     this.snackBar.open('Google Sign-In Failed', 'Error', {
+//                         duration: 3000,
+//                         panelClass: 'app-notification-error'
+//                     });
+//                 }
+//             });
+//         }
+//     }
+
+//     register() {
+//         this.router.navigate(['register']).then(success => {
+//             if (success) {
+//                 console.log('Navigation was successful!');
+//             } else {
+//                 console.log('Navigation failed!');
+//             }
+//         }).catch(error => {
+//             console.error('Navigation error:', error);
+//         });
+//     }
+// }

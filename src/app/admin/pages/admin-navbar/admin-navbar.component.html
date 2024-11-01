@@ -1,0 +1,119 @@
+<div class="flex">
+    <ng-container class="bg-red-900">
+        <aside id="logo-sidebar"
+               class="fixed top-0 left-0 z-40 w-64 border-r shadow-2xl rounded-2xl h-screen bg-gray-50 dark:bg-gray-800">
+            <div class="h-full px-3 py-4 overflow-y-auto">
+                <a href="https://flowbite.com/" class="flex items-center ps-2.5 mb-5">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXcxUd9hZNZtZnZuZokO1NfO0tmFA66FEnqg&s"
+                         class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
+                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">ReachU</span>
+                </a>
+                <ul class="space-y-2 font-medium">
+                    <!-- Dashboard Section -->
+                    <li>
+                        <a routerLink="/admin/dashboard" (click)="currentRoute = '/admin/dashboard'"
+                           [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-blue-500': currentRoute === '/admin/dashboard'}"
+                           class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <svg class="w-[37px] h-[37px] text-gray-800 dark:text-white" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M13.5 2c-.178 0-.356.013-.492.022l-.074.005a1 1 0 0 0-.934.998V11a1 1 0 0 0 1 1h7.975a1 1 0 0 0 .998-.934l.005-.074A7.04 7.04 0 0 0 22 10.5 8.5 8.5 0 0 0 13.5 2Z" />
+                                <path d="M11 6.025a1 1 0 0 0-1.065-.998 8.5 8.5 0 1 0 9.038 9.039A1 1 0 0 0 17.975 13H11V6.025Z" />
+                            </svg>
+                            <span class="ms-3">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <!-- Users Section -->
+                    <li>
+                        <a routerLink="/admin/user-management" (click)="currentRoute = '/admin/user-management'"
+                           [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-blue-500': currentRoute === '/admin/user-management'}"
+                           class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <svg class="w-[37px] h-[37px] text-gray-800 dark:text-white" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                      d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
+                        </a>
+                    </li>
+
+                    <!-- Category Section -->
+                    <li>
+                        <a routerLink="/admin/categories" (click)="currentRoute = '/admin/categories'"
+                           [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-blue-500': currentRoute === '/admin/categories'}"
+                           class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 17 14">
+                                <path
+                                    d="M16 2H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Zm0 6H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Zm0 6H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Z" />
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Category</span>
+                        </a>
+                    </li>
+
+                    <!-- Service Management Section -->
+                    <li>
+                        <a routerLink="/admin/add-services" (click)="currentRoute = '/admin/add-services'"
+                           [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-blue-500': currentRoute === '/admin/add-services'}"
+                           class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <svg class="w-[37px] h-[37px] text-gray-800 dark:text-white" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Service Management</span>
+                        </a>
+                    </li>
+          <li>
+            <a routerLink="/admin/ads" (click)="currentRoute = '/admin/ads'"
+               [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-blue-500': currentRoute === '/admin/ads'}"
+               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <svg class="w-[37px] h-[37px] text-gray-800 dark:text-white" aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                </svg>
+              <span class="ms-3">Service List</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/admin/partner-management" (click)="currentRoute = '/admin/partner-management'"
+               [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-blue-500': currentRoute === '/admin/partner-management'}"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <svg class="w-[37px] h-[37px] text-gray-800 dark:text-white" aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Partners</span>
+            </a>
+          </li>
+
+          <li>
+            <a (click)="logout()"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 16 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3" />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </aside>
+  </ng-container>
+  <ng-template #loginTemplate>
+    <!-- Display content for logged-out users here -->
+  </ng-template>
+</div>

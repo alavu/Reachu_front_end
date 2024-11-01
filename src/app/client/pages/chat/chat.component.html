@@ -1,0 +1,209 @@
+<!--<div class="connected-partners p-6 bg-white rounded-lg shadow-md mb-6">-->
+<!--    <h3 class="text-lg font-semibold mb-4">Connected Partners</h3>-->
+<!--    <ul *ngIf="connectedPartners.length < 0">-->
+<!--        <h1>Thre is no connected-partners</h1>-->
+<!--    </ul>-->
+<!--    <ul>-->
+<!--        <li *ngFor="let partner of connectedPartners"-->
+<!--            class="flex justify-between items-center py-2 border-b border-gray-200 last:border-b-0">-->
+<!--            <span>{{ partner.name }} - {{ partner.service }}</span>-->
+<!--            <button (click)="selectPartner(partner)"-->
+<!--                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">-->
+<!--                Chat-->
+<!--            </button>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--<div class="chat_window bg-white w-full max-w-md mx-auto rounded-lg shadow-lg overflow-hidden">-->
+<!--    <div class="top_menu bg-green-500 text-white p-3 flex justify-between items-center">-->
+<!--        <div class="title flex items-center">-->
+<!--            <span class="font-semibold">{{ selectedPartner?.name }}</span>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <ul class="messages p-4 space-y-4 h-80 overflow-y-auto bg-gray-50">-->
+<!--        &lt;!&ndash; Display each message &ndash;&gt;-->
+<!--        <li class="message flex items-start space-x-3"-->
+<!--            *ngFor="let item of messageList"-->
+<!--            [ngClass]="{'justify-end': item.message_side === 'sender', 'justify-start': item.message_side === 'receiver'}">-->
+<!--            <div class="avatar w-10 h-10 bg-gray-300 rounded-full"></div>-->
+<!--            <div class="text_wrapper max-w-xs bg-gray-200 rounded-lg p-3"-->
+<!--                 [ngClass]="{'bg-green-500 text-white': item.message_side === 'sender', 'bg-gray-200 text-gray-800': item.message_side === 'receiver'}">-->
+<!--                <div class="text">{{ item.message }}</div>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--    </ul>-->
+
+<!--    <div class="bottom_wrapper p-4 border-t border-gray-200 flex items-center">-->
+<!--        <div class="message_input_wrapper flex-grow">-->
+<!--            <input-->
+<!--                class="message_input w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:border-blue-400"-->
+<!--                placeholder="Message..." [(ngModel)]="messageInput" (keyup.enter)="sendMessage()"/>-->
+<!--        </div>-->
+<!--        <div-->
+<!--            class="send_message bg-blue-500 text-white rounded-lg px-4 py-2 ml-2 cursor-pointer hover:bg-blue-600 transition duration-300"-->
+<!--            (click)="sendMessage()">-->
+<!--            Send-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<div class="relative mt-5 mx-5">-->
+<!--    &lt;!&ndash; Connected Partners List &ndash;&gt;-->
+<!--    <div *ngIf="connectedPartners.length > 0; else noPartners"-->
+<!--         class="transition-all duration-300 ease-in-out xl:w-[33rem] lg:w-96 sm:w-52 bg-white rounded-xl border border-gray-300 shadow-lg dark:bg-gray-800 dark:border-gray-600">-->
+<!--        <mat-list role="list"-->
+<!--                  class="scrollbar-hide divide-y divide-gray-200 dark:divide-gray-700 max-h-[37rem] overflow-y-auto">-->
+<!--            <ng-container *ngFor="let partner of connectedPartners">-->
+<!--                <a (click)="selectPartner(partner)"-->
+<!--                   class="block hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition duration-200 ease-in-out">-->
+<!--                    <div class="flex items-center gap-4 p-4">-->
+<!--                        &lt;!&ndash; Placeholder Avatar &ndash;&gt;-->
+<!--                        <div class="rounded-full h-14 w-14 overflow-hidden transition-transform duration-300">-->
+<!--                            <div class="bg-gray-400 w-full h-full"></div>-->
+<!--                        </div>-->
+<!--                        <div class="flex flex-1 justify-between items-center">-->
+<!--                            <p class="text-gray-900 dark:text-gray-100 font-mono text-lg">-->
+<!--                                {{ partner.name }} - {{ partner.service }}-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--            </ng-container>-->
+<!--        </mat-list>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Chat Window &ndash;&gt;-->
+<!--    <div class="transition-all duration-300 ease-in-out absolute top-0 left-[34rem] w-[30rem]" *ngIf="selectedPartner">-->
+<!--        <div class="msg-header border border-gray-300 w-full h-16 bg-gray-800 rounded-t-xl flex items-center justify-between px-5">-->
+<!--            <div class="flex items-center">-->
+<!--                <div class="rounded-full h-10 w-10 overflow-hidden">-->
+<!--                    <div class="bg-gray-400 w-full h-full"></div>-->
+<!--                </div>-->
+<!--                <div class="ml-3">-->
+<!--                    <p class="text-white font-bold">{{ selectedPartner.name }}</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <a class="mr-5 cursor-pointer">-->
+<!--                <span nz-icon nzType="video-camera" nzTheme="fill" matTooltip="Start a video call"></span>-->
+<!--            </a>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Chat Area &ndash;&gt;-->
+<!--        <div class="chat-page">-->
+<!--            <div class="msg-inbox border border-gray-300 rounded-b-xl">-->
+<!--                <div class="chats px-6 pt-6 pb-2">-->
+<!--                    <div class="scrollbar-hide msg-page flex flex-col h-[27rem] overflow-y-auto">-->
+<!--                        <div *ngFor="let item of messageList" class="mb-4">-->
+<!--                            &lt;!&ndash; Sender's Message (right) &ndash;&gt;-->
+<!--                            <div *ngIf="item.message_side === 'sender'" class="flex items-start justify-end">-->
+<!--                                <div class="bg-green-600 p-3 rounded-lg shadow-lg max-w-[70%]">-->
+<!--                                    <p class="text-sm text-white mb-1 text-right">{{ item.message }}</p>-->
+<!--                                    <span class="time text-gray-400 text-xs block mt-1 text-right">-->
+<!--                                        {{ item.timeStamp | date:'shortTime' }} | {{ item.timeStamp | date:'MMM d' }}-->
+<!--                                    </span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash; Receiver's Message (left) &ndash;&gt;-->
+<!--                            <div *ngIf="item.message_side === 'receiver'" class="flex items-start justify-start">-->
+<!--                                <div class="bg-gray-700 p-3 rounded-lg shadow-lg max-w-[70%]">-->
+<!--                                    <p class="text-sm text-white mb-1 text-left">{{ item.message }}</p>-->
+<!--                                    <span class="time text-gray-400 text-xs block mt-1 text-left">-->
+<!--                                        {{ item.timeStamp | date:'shortTime' }} | {{ item.timeStamp | date:'MMM d' }}-->
+<!--                                    </span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Message Input &ndash;&gt;-->
+<!--                <div class="msg-bottom border-t border-gray-300 h-16 flex items-center px-4 bg-gray-800 rounded-b-xl">-->
+<!--                    <div class="input-group flex items-center w-full">-->
+<!--                        <input type="text" [(ngModel)]="messageInput" (keydown.enter)="sendMessage()"-->
+<!--                               class="flex-1 bg-gray-700 py-2 px-4 rounded-full text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition duration-200"-->
+<!--                               placeholder="Write a message..."/>-->
+<!--                        <button (click)="sendMessage()"-->
+<!--                                class="ml-3 text-blue-400 hover:text-blue-500 transition-transform transform hover:scale-105">-->
+<!--                            <span nz-icon nzType="send" nzTheme="outline" matTooltip="Send"></span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<ng-template #noPartners>-->
+<!--    <div class="text-center text-gray-500 text-lg font-medium mt-10">-->
+<!--        There are no connected partners.-->
+<!--    </div>-->
+<!--</ng-template>-->
+
+
+<div class="flex h-screen bg-custom-green text-black">
+    <!-- Sidebar -->
+    <div class="w-80 bg-[#f9f9f9] overflow-y-auto mr-3 border border-gray-300 shadow-md">
+        <!-- Connected Partners List -->
+        <div class="divide-y divide-purple-700">
+            <ng-container *ngFor="let partner of connectedPartners">
+                <a (click)="selectPartner(partner)" class="block p-4 hover:bg-purple-700 transition duration-200">
+                    <div class="flex items-center">
+                        <div class="rounded-full h-10 w-10 overflow-hidden bg-purple-600">
+                            <img [src]="'data:image/jpeg;base64,' + partner.img" [alt]="partner.name">
+                        </div>
+                        <div class="ml-3 border border-gray-300 p-2 rounded">
+                            <!-- Apply hover text color change here -->
+                            <p class="font-semibold text-custom-dark hover:text-white">{{ partner.name }}</p>
+                            <p class="font-semibold  text-custom-dark">{{ partner.service }}</p>
+                        </div>
+                    </div>
+                </a>
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="flex-1 flex flex-col border border-gray-300 shadow-md">
+    <!-- Chat Header -->
+        <div class="bg-custom-dark p-4 flex items-center justify-between border border-gray-300 shadow-md">
+            <div class="flex items-center">
+                <div class="rounded-full h-10 w-10 overflow-hidden bg-purple-600">
+                    <img [src]="'data:image/jpeg;base64,' + selectedPartner?.img" [alt]="selectedPartner?.name">
+                </div>
+                <div class="ml-3">
+                    <p class="font-semibold">{{ selectedPartner?.name }}</p>
+                    <p class="text-sm text-purple-300">{{ selectedPartner?.status }}</p>
+                </div>
+            </div>
+            <div class="flex space-x-4">
+                <button class="text-black hover:text-white" (click)="videoCall()" ><span nz-icon nzType="video-camera" nzTheme="outline" matTooltip="Start a video call" class="text-purple-700"></span></button>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-4">
+            <ng-container *ngFor="let message of messageList">
+                <div [ngClass]="{'flex justify-end': message.message_side === 'sender', 'flex justify-start': message.message_side === 'receiver'}">
+                    <div [ngClass]="{'bg-purple-600': message.message_side === 'sender', 'bg-purple-700': message.message_side === 'receiver'}" class="max-w-xs md:max-w-md rounded-lg p-3">
+                        <p class="text-sm">{{ message.message }}</p>
+                        <p class="text-xs text-purple-300 mt-1">{{ message.timeStamp | date:'shortTime' }}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Message Input -->
+        <div class="bg-custom-dark p-4 border border-gray-300 shadow-md">
+            <div class="flex items-center bg-black rounded-full">
+                <input type="text" [(ngModel)]="messageInput" (keydown.enter)="sendMessage()" class="flex-1 bg-transparent text-custom-dark placeholder-purple-300 px-4 py-2 focus:outline-none" placeholder="Type a message...">
+                <button (click)="sendMessage()" class="text-purple-300 hover:text-white px-4">
+                    <span nz-icon nzType="send" nzTheme="outline" class="text-purple-700"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

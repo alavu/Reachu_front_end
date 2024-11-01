@@ -1,0 +1,105 @@
+<div class="container mx-auto px-4 py-8 pb-4">
+    <h2 style="font-size: 1.75rem; font-weight: normal; margin-bottom: 1rem;">
+        AC & Appliance Repair
+    </h2>
+    <div class="flex justify-between gap-4 overflow-x-auto">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-48">
+            <img src="assets/Ac service and Repair.jpg" alt="AC Service and Repair" class="w-full h-36 object-cover">
+            <div class="p-4 text-center">
+                <h2 class="text-sm font-semibold">AC Service and Repair</h2>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-48">
+            <img src="assets/Washing machine repair.jpg" alt="Washing Machine Repair" class="w-full h-36 object-cover">
+            <div class="p-4 text-center">
+                <h2 class="text-sm font-semibold">Washing Machine Repair</h2>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-48">
+            <img src="assets/Water purifier.jpg" alt="Water Purifier Repair" class="w-full h-36 object-cover">
+            <div class="p-4 text-center">
+                <h2 class="text-sm font-semibold">Water Purifier Repair</h2>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-48">
+            <img src="assets/Refrigerator repair.jpg" alt="Refrigerator Repair" class="w-full h-36 object-cover">
+            <div class="p-4 text-center">
+                <h2 class="text-sm font-semibold">Refrigerator Repair</h2>
+            </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-48">
+            <img src="assets/Microwave repair.jpg" alt="Microwave Repair" class="w-full h-36 object-cover">
+            <div class="p-4 text-center">
+                <h2 class="text-sm font-semibold">Microwave Repair</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Next section with top padding -->
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-normal mb-4">
+            Salon for Women
+        </h2>
+        <!-- <div class="swiper mySwiper">
+        <div class="swiper-wrapper"> -->
+        <!-- Slide 1 -->
+        <!-- <a class="swiper-slide" [routerLink]="['/client/ad', ads[0]?.id]">
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <img [src]="updateImg(ads[0]?.returnedImg)" alt="{{ads[0]?.serviceName}}" class="w-full h-40 object-cover rounded-lg">
+                    <h3 class="mt-2 text-center">{{ads[0]?.serviceName}}</h3>
+                </div>
+            </a> -->
+
+        <!-- Slide 2 -->
+        <!-- <a class="swiper-slide" [routerLink]="['/client/ad', ads[1]?.id]">
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <img [src]="updateImg(ads[1]?.returnedImg)" alt="{{ads[1]?.serviceName}}" class="w-full h-40 object-cover rounded-lg">
+                    <h3 class="mt-2 text-center">{{ads[1]?.serviceName}}</h3>
+                </div>
+            </a> -->
+
+        <!-- Slide 3 -->
+        <!-- <a class="swiper-slide" [routerLink]="['/client/ad', ads[2]?.id]">
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <img [src]="updateImg(ads[2]?.returnedImg)" alt="{{ads[2]?.serviceName}}" class="w-full h-40 object-cover rounded-lg">
+                    <h3 class="mt-2 text-center">{{ads[2]?.serviceName}}</h3>
+                </div>
+            </a> -->
+
+        <!-- Slide 4 -->
+        <!-- <a class="swiper-slide" [routerLink]="['/client/ad', ads[3]?.id]">
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <img [src]="updateImg(ads[3]?.returnedImg)" alt="{{ads[3]?.serviceName}}" class="w-full h-40 object-cover rounded-lg">
+                    <h3 class="mt-2 text-center">{{ads[3]?.serviceName}}</h3>
+                </div>
+            </a> -->
+
+        <!-- Slide 5 -->
+        <!-- <a class="swiper-slide" [routerLink]="['/client/ad', ads[4]?.id]">
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <img [src]="updateImg(ads[4]?.returnedImg)" alt="{{ads[4]?.serviceName}}" class="w-full h-40 object-cover rounded-lg">
+                    <h3 class="mt-2 text-center">{{ads[4]?.serviceName}}</h3>
+                </div>
+            </a> -->
+
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <!-- Dynamic Slide Generation -->
+                    <a *ngFor="let ad of ads" class="swiper-slide" [routerLink]="['/client/ad', ad.id]">
+                        <div class="p-4 bg-white rounded-lg shadow-md">
+                            <img [src]="updateImg(ad.returnedImg)" alt="{{ad.serviceName}}" class="w-full h-40 object-cover rounded-lg">
+                            <h3 class="mt-2 text-center">{{ad.serviceName}}</h3>
+                        </div>
+                    </a>
+                </div>
+            <!-- Navigation Buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>

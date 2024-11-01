@@ -1,0 +1,71 @@
+<div class="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
+  <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold">
+        {{ isAddingNewAddress ? 'Add New Address' : 'Saved Addresses' }}
+      </h2>
+      <button mat-button (click)="onClose()">Close</button>
+    </div>
+
+    <div *ngIf="!isAddingNewAddress">
+      <a (click)="toggleAddAddressMode()" class="text-purple-700 hover:underline text-sm font-medium">+ Add another address</a>
+      
+      <div *ngFor="let address of savedAddresses; let i = index" class="flex items-start mt-4">
+        <input 
+          type="radio" 
+          id="{{ address.id }}" 
+          name="address" 
+          [(ngModel)]="selectedAddress" 
+          [value]="address" 
+          (change)="onAddressSelect()"
+          class="mt-1 mr-2">
+        <label for="{{ address.id }}" class="text-sm">
+          <strong>{{ address.label }}</strong><br>
+          {{ address.details }}
+        </label>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Address options">
+          <mat-icon><b>⋮</b></mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editAddress(i)">
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="deleteAddress(i)">
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+
+    <div *ngIf="isAddingNewAddress">
+      <form [formGroup]="addressForm">
+        <div class="mb-4">
+          <label for="label" class="block text-gray-700 font-medium mb-2">Name</label>
+          <input formControlName="label" id="label" type="text" class="w-full p-2 border rounded-lg">
+        </div>
+        <div class="mb-4">
+          <label for="details" class="block text-gray-700 font-medium mb-2">Address Details</label>
+          <textarea formControlName="details" id="details" rows="4" class="w-full p-2 border rounded-lg"></textarea>
+        </div>
+      </form>
+    </div>
+
+    <div class="mt-6 flex justify-end space-x-4">
+      <button (click)="onClose()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300">Cancel</button>
+      <button 
+        *ngIf="!isAddingNewAddress" 
+        (click)="proceed()" 
+        class="bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-300"
+        [disabled]="!selectedAddress">
+        Proceed
+      </button>
+      <button 
+        *ngIf="isAddingNewAddress" 
+        (click)="saveAddress()" 
+        class="bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-300">
+        Save Address
+      </button>
+    </div>
+  </div>
+</div>

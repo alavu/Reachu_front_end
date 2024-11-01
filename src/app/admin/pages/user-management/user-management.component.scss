@@ -1,0 +1,33 @@
+.block-button {
+    background-color: #ff4d4d !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 10px 20px !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.block-button:hover {
+    background-color: #e60000 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.unblock-button {
+    background-color: #28a745 !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 10px 20px !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.unblock-button:hover {
+    background-color: #218838 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}

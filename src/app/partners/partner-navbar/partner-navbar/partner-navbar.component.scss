@@ -1,0 +1,10 @@
+.fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 16rem; // Tailwind's width-64 is 16rem
+    background-color: #38b2ac; // Modify to your desired color
+    z-index: 10; // Make sure it stays above other content
+  }
+  

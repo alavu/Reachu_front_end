@@ -1,0 +1,74 @@
+<!--<div *ngIf="connectedUsers.length > 0; else noUsers">-->
+<!--    <ul>-->
+<!--        <li *ngFor="let user of connectedUsers">-->
+<!--            <span>{{ user.name }}</span>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--<ng-template #noUsers>-->
+<!--    <p>No connected users available.</p>-->
+<!--</ng-template>-->
+
+<div class="flex h-screen bg-white text-white">
+    <!-- Sidebar -->
+    <div class="w-80 bg-gray-500 overflow-y-auto">
+        <!-- Connected Users List -->
+        <div class="divide-y divide-purple-700">
+            <ng-container *ngFor="let user of connectedUsers">
+                <a (click)="selectPartner(user)" class="block p-4 hover:bg-purple-700 transition duration-200">
+                    <div class="flex items-center">
+                        <div class="rounded-full h-10 w-10 overflow-hidden bg-purple-600">
+<!--                            <img [src]="'data:image/jpeg;base64,' + user.img" [alt]="user.name">-->
+                            <img src="assets/profile.jpg" alt="AC Service + user.img" [alt]="user.name">
+                        </div>
+                        <div class="ml-3 border border-gray-300 p-2 rounded">
+                            <p class="font-semibold">{{ user.name }}</p>
+                            <p class="text-sm text-purple-300">{{ user.service }}</p>
+                        </div>
+                    </div>
+                </a>
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="flex-1 flex flex-col">
+        <!-- Chat Header -->
+        <div class="bg-gray-700 p-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="rounded-full h-10 w-10 overflow-hidden bg-purple-600">
+                    <img [src]="'data:image/jpeg;base64,' + selectedUser?.img" [alt]="selectedUser?.name">
+                </div>
+                <div class="ml-3">
+                    <p class="font-semibold">{{ selectedUser?.name }}</p>
+                    <p class="text-sm text-purple-300">{{ selectedUser?.status }}</p>
+                </div>
+            </div>
+            <div class="flex space-x-4">
+                <button class="text-black hover:text-white" (click)="videoCallWithUser()"><span nz-icon nzType="video-camera" nzTheme="outline" matTooltip="Start a video call"></span></button>
+            </div>
+        </div>
+        <!-- Messages -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-4">
+            <ng-container *ngFor="let message of messageList">
+                <div [ngClass]="{'flex justify-end': message.message_side === 'sender', 'flex justify-start': message.message_side === 'receiver'}">
+                    <div [ngClass]="{'bg-purple-600': message.message_side === 'sender', 'bg-purple-700': message.message_side === 'receiver'}" class="max-w-xs md:max-w-md rounded-lg p-3">
+                        <p class="text-sm">{{ message.message }}</p>
+                        <p class="text-xs text-purple-300 mt-1">{{ message.timeStamp | date:'shortTime' }}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Message Input -->
+        <div class="bg-gray-700 p-4">
+            <div class="flex items-center bg-black rounded-full">
+                <input type="text" [(ngModel)]="messageInput" (keydown.enter)="sendMessage()" class="flex-1 bg-transparent text-white placeholder-purple-300 px-4 py-2 focus:outline-none" placeholder="Type a message...">
+                <button (click)="sendMessage()" class="text-purple-300 hover:text-white px-4">
+                    <span nz-icon nzType="send" nzTheme="outline"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

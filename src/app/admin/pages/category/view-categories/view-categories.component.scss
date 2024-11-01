@@ -1,0 +1,12 @@
+.paginator-custom-styles {
+    background-color: white !important;
+    color: black !important;
+  }
+  ::ng-deep .mat-paginator {
+    color: black !important;
+    background-color: transparent;
+  }
+  
+  ::ng-deep .mat-mdc-select-value-text {
+    color: black !important;
+  }

@@ -1,0 +1,70 @@
+.header {
+    display: flex;
+    position: sticky; /* Change from fixed to sticky */
+    top: 0;           /* Ensure it sticks to the top */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;    /* Ensure the header stays on top of other content */
+}
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.search-bar input {
+    width: 50%;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.header-icons a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+}
+
+.header-icons .btn {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.header-icons .btn:hover {
+    background-color: #f0f0f0;
+}

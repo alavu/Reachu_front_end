@@ -1,0 +1,150 @@
+<div class="bg" style="background-color: #f8f8f8" *ngIf="ad">
+  <div class="ad-details-container">
+    <div class="top-section">
+      <div class="ad-detail">
+        <div nz-col nzSpan="8">
+          <img class="profile" style="height: 130px; width: 200px; border-radius: 10px" [src]="avatarUrl"
+            alt="profile" />
+        </div>
+        <div nz-col nzSpan="16">
+          <h2 style="cursor: pointer; color: #108ee9">
+            {{ ad.serviceName }}
+          </h2>
+          <h5>
+            Price : <b>{{ad.price}}</b>
+          </h5>
+          <h5>
+            Description : <b>{{ ad.description }}</b>
+            <div nz-ow>
+              Company Name :
+              <b>ReachU</b>
+            </div>
+
+          </h5>
+        </div>
+
+        <!-- Add a card section for available partners -->
+       <!-- Add a card section for available partners -->
+<div class="available-partners">
+  <h3 class="text-xl font-bold mb-4">Available Partners</h3>
+
+  <div *ngFor="let partner of partners" class="partner-card flex items-center mb-4 p-4 border rounded-lg shadow-sm">
+    <img
+      *ngIf="partner.img"
+      [src]="'data:image/jpeg;base64,' + partner.img"
+      alt="Partner Image"
+      class="w-20 h-20 p-1 rounded-full ring-2 ring-gray-300 object-cover"
+    />
+    <div class="ml-6">
+      <h4 class="text-lg font-bold">{{ partner.name }} {{ partner.lastname }}</h4>
+      <p> {{ partner.email }}</p>
+      <p>{{ partner.phone }}</p>
+      <p>{{ partner.service }}</p>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+      <div class="book-service">
+        <div>
+          <div nz-row>
+            <h2>Book Service</h2>
+          </div>
+          <form nz-form [formGroup]="validateForm">
+
+            <div nz-row>
+              <div nz-col nzSpan="24">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="24" nzFor="partnerSelect">Select Partner</nz-form-label>
+<!--                  <nz-form-control [nzSpan]="24">-->
+<!--                    <nz-select formControlName="selectedPartner" name="selectedPartner" id="selectedPartner"-->
+<!--                      placeholder="Select a partner">-->
+<!--                      <nz-option *ngFor="let partner of partners" [nzValue]="partner.id"-->
+<!--                                 (click)="selectPartnerId(partner.id)"-->
+<!--                        [nzLabel]="partner.name"></nz-option>-->
+<!--                    </nz-select>-->
+<!--                  </nz-form-control>-->
+
+                    <nz-form-control [nzSpan]="24">
+                        <nz-select formControlName="selectedPartner" placeholder="Select a partner" (ngModelChange)="selectPartnerId($event)">
+                            <nz-option *ngFor="let partner of partners" [nzValue]="partner.id" [nzLabel]="partner.name"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+
+
+                </nz-form-item>
+              </div>
+            </div>
+
+
+            <div nz-row>
+              <div nz-col nzSpan="24">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="24" nzFor="bookDate">Date of Booking</nz-form-label>
+                  <nz-form-control [nzSpan]="24">
+                    <nz-date-picker formControlName="bookDate" name="bookDate" id="bookDate"
+                      [nzDisabledDate]="disabledDate">
+                    </nz-date-picker>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div *ngIf="validateForm.get('bookDate').value">
+              <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzFor="timeSlot">Select Time Slot</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                  <nz-time-picker formControlName="timeSlot" name="timeSlot" id="timeSlot" [nzFormat]="'h:mm a'"
+                    [nzMinuteStep]="30" [nzUse12Hours]="true">
+                  </nz-time-picker>
+
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzFor="duration">How many hours would you like to book?</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                  <nz-select formControlName="duration" name="duration" id="duration" placeholder="Select duration">
+                    <nz-option *ngFor="let option of durationOptions" [nzValue]="option" [nzLabel]="option"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+
+            </div>
+
+            <!-- <button nz-button [nzType]="'primary'" [disabled]="validateForm.invalid" (click)="bookService()">
+                            Book
+                          </button> -->
+
+            <button nz-button [nzType]="'primary'" [disabled]="validateForm.invalid" (click)="bookService()">
+              Continue
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reviews-section">
+      <div class="review-card" *ngFor="let review of reviews">
+        <nz-card [nzBordered]="false" nzTitle="{{ review.clientName }}">
+          <p>
+            Review: <strong>{{ review.review }}</strong>
+          </p>
+          <p>
+            Review:
+            <strong><nz-rate disabled [ngModel]="review.rating"></nz-rate></strong>
+          </p>
+          <p>
+            Posted on:
+            <strong>{{ review.reviewDate | date : "dd/MM/yyyy" }}</strong>
+          </p>
+        </nz-card>
+      </div>
+    </div>
+  </div>
+
+
+</div>

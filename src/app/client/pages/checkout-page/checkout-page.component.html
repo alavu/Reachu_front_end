@@ -1,0 +1,121 @@
+<div class="container mx-auto p-6">
+    <div class="flex flex-col md:flex-row gap-6 ">
+        <!-- Left Side -->
+        <div class="md:w-1/2 bg-white rounded-lg shadow-md p-6 space-y-6" style="width: 50%;">
+            <!-- Send Booking Details -->
+            <div class="flex items-center space-x-4">
+                <div class="bg-gray-200 p-3 rounded-full">
+                    <!-- Icon for contact details -->
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 00-8 0v5a4 4 0 008 0V7z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 14v3m0 0a2 2 0 11-4 0v-3m4 0a2 2 0 114 0v3m-4 0h4" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-gray-600">Send booking details to</p>
+                    <p class="font-semibold">+91 7907655458</p>
+                </div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="flex items-center space-x-4">
+                <div class="bg-gray-200 p-3 rounded-full">
+                    <!-- Icon for address -->
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 2C8.686 2 6 4.686 6 8c0 4.733 5.455 10.345 5.661 10.553a1 1 0 001.478 0C12.545 18.345 18 12.733 18 8c0-3.314-2.686-6-6-6z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 10a2 2 0 100-4 2 2 0 000 4z" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-gray-600">Address</p>
+                    <!-- Display selected address if available -->
+                    <div *ngIf="selectedAddress" class="mt-2">
+                        <p class="font-semibold">{{ selectedAddress.label }}</p>
+                        <p>{{ selectedAddress.details }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Select Address Button -->
+            <div>
+                <button (click)="openAddModal()"
+                    class="bg-purple-600 text-white w-full py-3 rounded-lg hover:bg-purple-700 transition duration-300">
+                    Select an address
+                </button>
+            </div>
+
+            <!-- Payment Method Section -->
+            <div class="text-gray-600 opacity-75">Payment Method</div>
+
+            <!-- Payment Button Section -->
+            <div>
+                <button [disabled]="!addressSelected" class="bg-blue-600 text-white w-full py-3 rounded-lg
+                    hover:bg-blue-700 transition duration-300" [class.cursor-not-allowed]="!addressSelected"
+                    [class.opacity-50]="!addressSelected" (click)="pay()">
+                    Proceed to Payment
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="md:w-1/2 bg-white rounded-lg shadow-md p-6 space-y-6 mx-auto p-6">
+            <!-- Payment Summary Section -->
+            <div *ngIf="ad">
+                <div class="text-gray-600 font-semibold mb-4">Payment Summary</div>
+                <div class="flex justify-between mb-2">
+                  <p class="text-gray-600">Item total</p>
+                  <p class="font-semibold">₹{{ ad.price }}</p>
+                </div>
+                <div class="flex justify-between mb-2">
+                  <p class="text-gray-600">Item discount</p>
+                  <p class="text-green-600 font-semibold">-₹50</p>
+                </div>
+                <div class="flex justify-between mb-2">
+                  <p class="text-gray-600">Taxes and Fee</p>
+                  <p class="font-semibold">₹79</p>
+                </div>
+                <hr class="my-2 border-gray-300">
+                <div class="flex justify-between mb-4">
+                  <p class="text-gray-600 font-semibold">Total</p>
+                  <p class="font-semibold">₹{{ calculateTotal(ad.price) }}</p>
+                </div>
+            </div>
+
+            <!-- Tip Section -->
+            <div class="bg-gray-100 p-4 rounded-lg shadow-inner">
+                <div class="flex justify-between mb-2">
+                    <p class="text-gray-600">Add a tip to thank the Professional</p>
+                    <select class="border rounded-lg p-2">
+                        <option>₹0</option>
+                        <option>₹10</option>
+                        <option>₹50</option>
+                        <option>₹100</option>
+                    </select>
+                </div>
+                <p class="text-sm text-gray-500">100% of the tip goes to the professional.</p>
+            </div>
+
+            <!-- Amount to Pay Section -->
+            <div class="flex items-center justify-between bg-white rounded-lg shadow-md p-4">
+                <p class="font-semibold">Amount to Pay</p>
+                <p class="font-semibold">₹{{ calculateTotal(ad.price) }}</p>
+                <button class="text-blue-600 font-semibold hover:underline">View Breakup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Address Modal -->
+<div id="addressModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+        <!-- Modal content for editing, adding, or selecting an address -->
+        <h2 class="text-xl font-semibold mb-4">Select Address</h2>
+        <!-- Your address form or options here -->
+        <button onclick="closeAddressModal()"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-700 transition duration-300">Close</button>
+    </div>
+</div>

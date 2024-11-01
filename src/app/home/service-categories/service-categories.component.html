@@ -1,0 +1,97 @@
+<div class="flex bg-slate-600 p-8 justify-center items-start">
+    <div class="flex-1  p-5">
+        <div class="bg-white border border-[#ebebeb] rounded-lg p-5 shadow-md max-w-xl w-full flex-1">
+            <h1 class="text-2xl font-bold mb-4 text-center">Home services at your doorstep</h1>
+            <div class="text-center mb-5">
+                <h2 class="text-xl font-semibold mb-4">What are you looking for?</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <!-- Service Categories -->
+                    <div class="flex flex-col items-center p-2 border border-[#ebebeb] rounded-lg bg-white shadow-md">
+                        <img src="assets/salon.png" alt="Salon Prime" class="w-12 h-12">
+                        <span class="mt-2 text-sm">Salon for women</span>
+                    </div>
+                    <div class="flex flex-col items-center p-2 border border-[#ebebeb] rounded-lg bg-white shadow-md">
+                        <img src="assets/ac-repair.png" alt="AC & Appliance Repair" class="w-12 h-12">
+                        <span class="mt-2 text-sm">AC & Appliance Repair</span>
+                    </div>
+                    <div class="flex flex-col items-center p-2 border border-[#ebebeb] rounded-lg bg-white shadow-md">
+                        <img src="assets/cleaning.png" alt="Bathroom & Kitchen Cleaning" class="w-12 h-12">
+                        <span class="mt-2 text-sm">Bathroom & Kitchen Cleaning</span>
+                    </div>
+                    <div class="flex flex-col items-center p-2 border border-[#ebebeb] rounded-lg bg-white shadow-md">
+                        <img src="assets/electrician.png" alt="Electrician, Plumber & Carpenter" class="w-12 h-12">
+                        <span class="mt-2 text-sm">Electrician, Plumber & Carpenter</span>
+                    </div>
+                    <div class="flex flex-col items-center p-2 border border-[#ebebeb] rounded-lg bg-white shadow-md">
+                        <img src="assets/water-purifier.png" alt="Native Water Purifier" class="w-12 h-12">
+                        <span class="mt-2 text-sm">Native Water Purifier</span>
+                    </div>
+                    <div class="flex flex-col items-center p-2 border border-[#ebebeb] rounded-lg bg-white shadow-md">
+                        <img src="assets/locks.png" alt="Native Smart Locks" class="w-12 h-12">
+                        <span class="mt-2 text-sm">Native Smart Locks</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Rating Component -->
+        <div class="flex justify-start mt-4">
+            <app-service-rating></app-service-rating>
+        </div>
+
+        <!-- <div class="flex justify-start mt-4">
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="searchAdByName()" class="flex items-center" style="margin: 20px 0; text-align:center;">
+                <input nz-input placeholder="Enter service to search" nzSize="large" style="width: 90%;" formControlName="service" />
+                <button nz-button nzSize="large" nzType="primary" style="margin-left: 5px;" [disabled]="validateForm.invalid">Search</button>
+              </form>
+
+          </div> -->
+
+          <div class="flex justify-start mt-4">
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="searchAdByName()" class="flex items-center" style="margin: 20px 0; text-align:start;">
+              <nz-input-group nzSearch nzSize="large">
+                <input
+                  nz-input
+                  placeholder="Enter service to search"
+                  nzSize="large"
+                  style="width: 100%;"
+                  formControlName="service"
+                  (input)="onInputChange($event)"
+                  [nzAutocomplete]="auto"
+                />
+                <nz-autocomplete #auto>
+                  <nz-auto-option *ngFor="let ad of filteredAds" [nzValue]="ad.serviceName" (click)="onAdSelected(ad)">
+                    <div class="global-search-item">
+                      <img *ngIf="ad.returnedImg" [src]="updateImg(ad.returnedImg)" alt="Service Image" style="width: 50px; height: 50px; margin-right: 10px;" />
+                      <div>
+                        <strong>{{ ad.serviceName }}</strong><br />
+                        <small>{{ ad.description }}</small><br />
+                        <small>Starts at ₹{{ ad.price }}</small>
+                      </div>
+                    </div>
+                  </nz-auto-option>
+                </nz-autocomplete>
+              </nz-input-group>
+              <button nz-button nzSize="large" nzType="primary" style="margin-left: 5px;" [disabled]="validateForm.invalid">Search</button>
+            </form>
+          </div>
+          
+          
+        
+    </div>
+    <div class="flex-1 p-5">
+        <div class="grid grid-cols-2 gap-4">
+            <img src="assets/Home-beautician.jpg" alt="Image 1" class="w-full h-64 object-cover rounded-md shadow-md">
+            <img src="assets/Home-body-massage.jpg" alt="Image 2" class="w-full h-64 object-cover rounded-md shadow-md">
+            <img src="assets/Home-Ac-service.jpg" alt="Image 3" class="w-full h-64 object-cover rounded-md shadow-md">
+            <img src="assets/Home-Plumbing-service.jpg" alt="Image 4" class="w-full h-64 object-cover rounded-md shadow-md">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

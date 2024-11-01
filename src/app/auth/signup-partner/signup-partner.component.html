@@ -1,0 +1,72 @@
+<div class="bg">
+    <div class="parent">
+        <div class="child">
+            <div nz-col>
+                <h1 style="margin-left: 55px">Partner Signup</h1>
+            </div>
+
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+                <nz-form-item>
+                    <nz-form-control nzHasFeedback nzErrorTip="The input is not valid E-mail!">
+                        <input nz-input placeholder="E-mail" formControlName="email"/>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control
+                        nzHasFeedback
+                        [nzErrorTip]="validateForm.get('password')?.hasError('required') ? 'Password is required' : ''">
+                        <input nz-input placeholder="Password"  formControlName="password"/>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control
+                        nzHasFeedback
+                        [nzErrorTip]="validateForm.get('checkPassword')?.hasError('passwordMismatch') ? 'Passwords do not match' : 'Confirm Password is required'">
+                        <input nz-input placeholder="Confirm Password" formControlName="checkPassword"/>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control nzHasFeedback nzErrorTip="The input is not valid name!">
+                        <input nz-input placeholder="Name" formControlName="name"/>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control nzHasFeedback nzErrorTip="The input is not valid lastname!">
+                        <input nz-input placeholder="LastName" formControlName="lastname"/>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control
+                        nzHasFeedback
+                        [nzErrorTip]="validateForm.get('phone')?.hasError('invalidPhone') ? 'Phone number must contain exactly 10 digits and no special characters!' : 'Phone number is required'">
+                        <input nz-input placeholder="Phone" formControlName="phone"/>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control nzHasFeedback nzErrorTip="The input is not valid service!">
+                        <nz-select formControlName="service" placeholder="Select a Service">
+                            <nz-option *ngFor="let service of categories" [nzValue]="service.id"
+                                       [nzLabel]="service.name"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <div style="text-align: center;">
+                    <button nz-button [nzType]="'primary'" class="login-form-button">
+                        Register
+                    </button>
+                    <br />
+                    Or <a routerLink="/login">login now!</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

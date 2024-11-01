@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.bg {
+    background-color: #f5f7f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.parent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.child {
+    padding: 50px;
+    width: 380px;
+    background-color: white;
+    box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.centered-heading {
+    text-align: center;
+    width: 100%;
+    margin-left: 30px;
+    margin-bottom: 5px;
+}
+
+.google-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid #dcdcdc;
+    border-radius: 24px;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: none;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Make the button take full width */
+    max-width: 300px; /* Optional: Limit the maximum width */
+}
+
+.google-login-btn .google-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.google-login-btn:hover {
+    background-color: #f1f1f1;
+    border-color: #c7c7c7;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.google-login-btn:active {
+    background-color: #e7e7e7;
+    border-color: #b5b5b5;
+}
+
+.login-form {
+    max-width: 300px;
+    margin: 0 auto; /* Center the form */
+}
+
+.imgDiv {
+    width: 100%;
+    vertical-align: middle;
+    margin-bottom: 40px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 16px 0;
+    width: 100%;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.divider:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.divider:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.login-form-margin {
+    margin-bottom: 26px;
+}
+
+button[nz-button] {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 24px; /* Increased border radius */
+    background-color: #0d0c22;
+    color: white;
+    border-color: #0d0c22;
+}
+
+button[nz-button]:hover {
+    background-color: #0b0a1d;
+    border-color: #0b0a1d;
+}

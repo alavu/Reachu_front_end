@@ -1,0 +1,103 @@
+// $secondary-color: #141a33;
+// $primary-color: #F48023;
+// $White: #ffffff;
+// $white-one: #fcfcfc;
+
+// body, html {
+//     height: 100%;
+//     margin: 0;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     background-color: #f9f9f9;
+// }
+
+// .main-content {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     padding: 20px;
+// }
+
+// .main-heading {
+//     margin-top: 30px; /* Adjust the top margin as needed */
+//     font-size: 2rem;
+//     text-align: center;
+// }
+
+// .outer-container {
+//     display: flex;
+//     align-items: center; /* Vertically center both cards */
+//     justify-content: center; /* Horizontally center the outer container */
+// }
+
+// .left-card {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     margin-right: 20px;
+// }
+
+// .image-card-left img, .image-card-right img {
+//     width: 100px; /* Adjust the size of the images */
+//     height: auto;
+//     margin-bottom: 10px;
+// }
+
+.outer-card {
+    background-color: White;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 50px;
+    width: 100%;
+    max-width: 700px; /* Adjust the max-width as needed */
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-categories {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px; /* Adjust the gap as needed */
+    margin: 0 10px; /* Adjust to align with outer card's padding */
+}
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    background-color: white-one;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-card img {
+    width: 50px;
+    height: 50px;
+}
+
+.category-card span {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .categories {
+        grid-template-columns: 1fr;
+        margin: 0; /* Adjust for mobile view */
+    }
+
+    .category-card {
+        width: 100%;
+        max-width: 150px;
+    }
+}

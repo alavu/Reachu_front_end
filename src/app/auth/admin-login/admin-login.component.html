@@ -1,0 +1,34 @@
+<div class="bg">
+<!--        <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="working...">-->
+    <div class="parent">
+        <div class="child">
+            <div nz-row class="imgDiv">
+                <div class="flex items-center justify-center mt-7">
+                    <h1 class="centered-heading">Sign in to ReachU Admin</h1>
+                </div>
+            </div>
+<!--            (ngSubmit)="submitForm()"-->
+            <form nz-form [formGroup]="validateForm" class="login-form" >
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your email!">
+                        <nz-input-group nzPrefixIcon="user">
+                            <input type="email" nz-input formControlName="email" placeholder="Username" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your Password!">
+                        <nz-input-group nzPrefixIcon="lock">
+                            <input type="password" nz-input formControlName="password" placeholder="Password" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <button type="submit" nz-button class="login-form-button login-form-margin" (click)="submitForm()" [nzType]="'primary'">Log in</button>
+
+            </form>
+        </div>
+    </div>
+<!--        </nz-spin>-->
+</div>

@@ -24,6 +24,10 @@ public class Reservation {
 
     private Date bookDate;
 
+    private String paymentMode;
+
+    private String paymentStatus;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
@@ -31,9 +35,9 @@ public class Reservation {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "admin_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User company;
+    private User admin;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ad_id", nullable = false)
@@ -50,8 +54,10 @@ public class Reservation {
         dto.setReviewStatus(reviewStatus);
 
         dto.setAdId(ad.getId());
-        dto.setCompanyId(company.getId());
+        dto.setAdminId(admin.getId());
         dto.setUserName(user.getName());
+        dto.setPaymentMode(paymentMode);
+        dto.setPaymentStatus(paymentStatus);
 
         return dto;
     }

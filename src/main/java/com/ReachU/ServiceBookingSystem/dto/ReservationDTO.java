@@ -23,8 +23,12 @@ public class ReservationDTO {
 
     private String userName;
 
-    private Long companyId;
+    private Long adminId;
 
     private Long adId;
+
+    private String paymentMode;
+
+    private String paymentStatus;
 
 }

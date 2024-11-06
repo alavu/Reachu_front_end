@@ -73,7 +73,7 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(signupRequestDTO.getEmail());
         user.setPhone(signupRequestDTO.getPhone());
         user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
-        user.setEnabled(false); //Enable true only after otp verification
+        user.setEnabled(true); //Enable true only after otp verification
         user.setBlocked(false);
         user.setUserRole(UserRole.CLIENT);
         user.set_blocked_by_admin(false);
@@ -94,7 +94,7 @@ public class AuthServiceImpl implements AuthService {
         partner.setEmail(partnerDTO.getEmail());
         partner.setPhone(partnerDTO.getPhone());
         partner.setPassword(new BCryptPasswordEncoder().encode(partnerDTO.getPassword()));
-        partner.setEnabled(false);
+        partner.setEnabled(true);
         partner.setBlocked(false);
         partner.set_blocked_by_admin(false);
         partner.setUserRole(UserRole.PARTNER);

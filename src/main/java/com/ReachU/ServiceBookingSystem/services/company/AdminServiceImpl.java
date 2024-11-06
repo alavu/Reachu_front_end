@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CompanyServiceImpl implements CompanyService {
+public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
     private final AdRepository adRepository;
@@ -27,6 +27,14 @@ public class CompanyServiceImpl implements CompanyService {
     private final ReservationRepository reservationRepository;
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        System.out.println("Users fetched from database: " + users);
+        return users;
+    }
+
 
     @Override
     public boolean postService(Long userId, AdDTO adDTO) throws IOException {
@@ -136,8 +144,8 @@ public class CompanyServiceImpl implements CompanyService {
         return false;
     }
 
-    public List<ReservationDTO> getAllAdBookings(Long companyId) {
-        return reservationRepository.findAllByCompanyId(companyId)
+    public List<ReservationDTO> getAllAdBookings(Long adminId) {
+        return reservationRepository.findAllByAdminId(adminId)
                 .stream().map(Reservation::getReservationDto).collect(Collectors.toList());
     }
 
